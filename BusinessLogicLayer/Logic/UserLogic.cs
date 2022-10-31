@@ -166,5 +166,45 @@ namespace BusinessLogicLayer.Logic
             throw new ArgumentException("Your password or username is incorrect");
         }
 
+        // Returns the user information and logs the user in
+        public static UserCredentials LogIn(string userName, string password)
+        {
+            UserCredentials userCredentials;
+
+            List<User> users = DbContext.Users
+                // Where the user's username matches the given useraname
+                .Where(u => u.UserName == userName)
+                // Convert the result set to a list
+                .ToList();
+
+            // If there are no users with the given user name trow an exception
+            if (users.Count == 0)
+                throw new ArgumentException("Your password or username is incorrect");
+
+            // For every user check is the password matches
+            foreach (User user in users)
+            {
+                // Cheks if the hashed password is equal to the user password
+                if (Hash(password + user.Salt.ToString()) == user.Password)
+                {
+                    // Add new instace of a UserCredentials
+                    userCredentials = new UserCredentials()
+                    {
+                        Id = user.UserId,
+                        UserName = user.UserName,
+                        HashedPassword = user.Password,
+                    };
+
+                    // Ckecks if the user has eneterd his user profile data
+                    if (CheckUserProfile(userCredentials.Id) == false)
+                        throw new ArgumentNullException("You need to finish your registration first");
+
+                    // Returns the newly created UserCredentials
+                    return userCredentials;
+                }
+            }
+            // Throws exception if the user couldn't log in
+            throw new ArgumentException("Your password or username is incorrect");
+        }
     }
 }

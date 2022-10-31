@@ -22,5 +22,23 @@ namespace DiabetesTracker.Logic
             // Otherwise return true
             return true;
         }
+
+        // General hander for user input
+        public static bool GeneralHandler(params string[] userInputs)
+        {
+            // For every user input test the input
+            foreach (string userInput in userInputs)
+            {
+                // If the inpt contains ', ' or '|' show error messange boc and return false
+                if (string.IsNullOrEmpty(userInput) || userInput.Contains(", ") || userInput.Contains('|'))
+                {
+                    MessageBox.Show("Your input must not contain \', \' or \'|\'", "Error");
+                    return false;
+                }
+            }
+
+            // Otherwise return true
+            return true;
+        }
     }
 }

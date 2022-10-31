@@ -108,5 +108,37 @@ namespace BusinessLogicLayer.Logic
             return true;
         }
 
+        // Checks if the password is on corrent format
+        private static bool CheckPassword(string pass)
+        {
+            // Checks if the password is between 10 and 32 characters long
+            if (pass.Length <= 10 || pass.Length > 32)
+                throw new ArgumentException("Password must be between 10 and 32 charcters");
+
+
+            // Checks if the password contains a space
+            if (pass.Contains(" "))
+                throw new ArgumentException("Password must not contain spaces");
+
+            // Checks if the password doesn't conatin upper characters
+            if (!pass.Any(char.IsUpper))
+                throw new ArgumentException("Password must contain at least 1 upper character");
+
+            // Checks if the password doesn't conatin lower characters
+            if (!pass.Any(char.IsLower))
+                throw new ArgumentException("Password must contain at least 1 lower character");
+
+            // Checks if the password conatins upper any special symbols
+            string specialCharacters = @"%!@#$%^&*()?/>.<,:;'\}]{[_~`+=-" + "\"";
+            char[] specialCharactersArray = specialCharacters.ToCharArray();
+            foreach (char c in specialCharactersArray)
+            {
+                if (pass.Contains(c))
+                    return true;
+            }
+            throw new ArgumentException("Password must contain at least 1 special character");
+        }
+
+        
     }
 }

@@ -23,13 +23,16 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
     public partial class UserAuthenticationWindow : Window
     {
         public LogInPage LogInPage { get; set; }
+        public RegistrationPage RegistrationPage { get; set; }
 
         public UserAuthenticationWindow()
         {
             try
             {
                 //Services.SetUpConnection();
-                LogInPage = new LogInPage();
+                LogInPage = new LogInPage(this);
+                RegistrationPage = new RegistrationPage(this);
+
                 InitializeComponent();
                 ShowPage(LogInPage);
             }

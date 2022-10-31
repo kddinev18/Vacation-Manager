@@ -1,5 +1,4 @@
-﻿using ServiceLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,27 +16,25 @@ using System.Windows.Shapes;
 namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages
 {
     /// <summary>
-    /// Interaction logic for LogInPage.xaml
+    /// Interaction logic for RegistrationPage.xaml
     /// </summary>
-    public partial class LogInPage : Page
+    public partial class RegistrationPage : Page
     {
         private UserAuthenticationWindow _userAuthentication;
-        public LogInPage(UserAuthenticationWindow userAuthentication)
+        public RegistrationPage(UserAuthenticationWindow userAuthentication)
         {
             _userAuthentication = userAuthentication;
-
             InitializeComponent();
         }
 
-        //Event handlers
-        private void OpenRegistrationFormButton_Click(object sender, RoutedEventArgs e)
+        private void OpenLogInFormButton_Click(object sender, RoutedEventArgs e)
         {
-            // Shows RegistrationPage
-            _userAuthentication.ShowPage(_userAuthentication.RegistrationPage);
+            // Show LogInPage
+            _userAuthentication.ShowPage(_userAuthentication.LogInPage);
         }
-        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            // Log in and sets CurrentUserId to the logged user id
+            // Register and set the CurrentUserId
         }
     }
 }

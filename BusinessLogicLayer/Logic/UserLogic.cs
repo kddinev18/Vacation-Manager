@@ -60,6 +60,40 @@ namespace BusinessLogicLayer.Logic
             return salt.ToString();
         }
 
-        
+        // Creates a new user
+        public static int Register(string userName, string email, string password)
+        {
+            // For every existing user check if the email and uername are the same
+            foreach (User existingUser in DbContext.Users)
+                if (existingUser.Email == email || existingUser.UserName == userName)
+                    throw new ArgumentException("There is already a user with that email or username");
+
+            // Checks if the email is on corrent format
+            CheckEmail(email);
+            // Checks if the password is on corrent format
+            CheckPassword(password);
+            // Gets the salt
+            string salt = GetSalt();
+            // Hashes the password combinded with the salt
+            string hashPassword = Hash(password + salt);
+
+            // Add new instance of a User
+            User newUser = new User()
+            {
+                UserName = userName,
+                Password = hashPassword,
+                Email = email,
+                Salt = salt
+            };
+
+            // Add the newly added user into the current context
+            DbContext.Users.Add(newUser);
+
+            // Save all changes made in this context into the database
+            DbContext.SaveChanges();
+
+            // Returns the newly added user
+            return newUser.UserId;
+        }
     }
 }

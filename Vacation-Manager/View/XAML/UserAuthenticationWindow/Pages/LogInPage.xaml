@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:userControls="clr-namespace:Vacation_Manager.View.XAML.UserControls"
+      xmlns:userControls="clr-namespace:Vacation_Manager.View.Code_behind.UserControls"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
@@ -14,7 +14,7 @@
         <StackPanel x:Name="LoginPanel" Width="350">
             <StackPanel Margin="20 40">
                 <TextBlock Text="LogIn" Margin="0 30 0 10" Foreground="#2b2b2b" TextAlignment="Center" FontSize="40" FontFamily="Archive"/>
-                <userControls:TextBoxForm x:Name="UserName" TextBoxIcon="Account" TextBoxHintText="UserName"/>
+                <userControls:TextBoxControl x:Name="UserName" TextBoxIcon="Account" TextBoxHintText="UserName"/>
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <Icon:PackIconMaterial Kind="FormTextboxPassword" Style="{StaticResource textBoxIcon}"/>
                     <PasswordBox x:Name="PasswordTextBox" Margin="10 0" materialDesign:HintAssist.Hint="********" Foreground="#2b2b2b" Width="250"/>

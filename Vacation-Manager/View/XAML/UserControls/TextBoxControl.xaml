@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Vacation_Manager.Code_behind.XAML.UserControls.TextBoxControl"
+﻿<UserControl x:Class="Vacation_Manager.View.Code_behind.UserControls.TextBoxControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

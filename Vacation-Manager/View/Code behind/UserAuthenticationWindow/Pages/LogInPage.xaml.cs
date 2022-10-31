@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages
         public LogInPage()
         {
             InitializeComponent();
+        }
+
+        //Event handlers
+        private void OpenRegistrationFormButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Shows RegistrationPage
+        }
+        private void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Log in and sets CurrentUserId to the logged user id
         }
     }
 }

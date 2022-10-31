@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages;
 
 namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
 {
@@ -21,18 +22,26 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
     /// </summary>
     public partial class UserAuthenticationWindow : Window
     {
+        public LogInPage LogInPage { get; set; }
+
         public UserAuthenticationWindow()
         {
             try
             {
                 //Services.SetUpConnection();
+                LogInPage = new LogInPage();
                 InitializeComponent();
+                ShowPage(LogInPage);
             }
             catch (Exception)
             {
-                MessageBox.Show("The server is currently down. Plase excuse us.", "Connection error");
+                MessageBox.Show("The server is currently down. Please excuse us.", "Connection error");
                 Application.Current.Shutdown();
             }
+        }
+        public void ShowPage(Page page)
+        {
+            Forms.Content = page;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

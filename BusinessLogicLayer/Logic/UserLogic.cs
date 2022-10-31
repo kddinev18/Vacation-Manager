@@ -139,6 +139,32 @@ namespace BusinessLogicLayer.Logic
             throw new ArgumentException("Password must contain at least 1 special character");
         }
 
-        
+        // Log in with pre-hashed password
+        public static int LogInWithPreHashedPassword(string username, string preHashedPassword)
+        {
+            List<User> users = DbContext.Users
+                // Where the user's username matches the given useraname
+                .Where(u => u.UserName == username)
+                // Convert the result set to a list
+                .ToList();
+
+            // If there are no users with the given user name trow an exception
+            if (users.Count == 0)
+                throw new ArgumentException("Your password or username is incorrect");
+
+            // For every user check if the pre-Hased password matches
+            foreach (User user in users)
+            {
+                // If pre-Hased passwords matches return the user's id
+                if (preHashedPassword == user.Password)
+                {
+                    return user.UserId;
+                }
+            }
+
+            // Otherwise throw an exception
+            throw new ArgumentException("Your password or username is incorrect");
+        }
+
     }
 }

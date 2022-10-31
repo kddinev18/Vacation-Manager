@@ -10,11 +10,10 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="View\Code behind\UserAuthenticationWindow\Pages\" />
-    <Folder Include="View\XAML\UserAuthenticationWindow\Pages\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
   </ItemGroup>
 

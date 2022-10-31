@@ -25,7 +25,7 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
         {
             try
             {
-                Services.SetUpConnection();
+                //Services.SetUpConnection();
                 InitializeComponent();
             }
             catch (Exception)
@@ -33,6 +33,20 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
                 MessageBox.Show("The server is currently down. Plase excuse us.", "Connection error");
                 Application.Current.Shutdown();
             }
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Drag the window of the button is hold
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Remove the server connection
+            Services.RemoveConnection();
+            // Shutdown the application
+            Application.Current.Shutdown();
         }
     }
 }

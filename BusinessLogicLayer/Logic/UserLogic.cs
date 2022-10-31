@@ -195,10 +195,6 @@ namespace BusinessLogicLayer.Logic
                         HashedPassword = user.Password,
                     };
 
-                    // Ckecks if the user has eneterd his user profile data
-                    if (CheckUserProfile(userCredentials.Id) == false)
-                        throw new ArgumentNullException("You need to finish your registration first");
-
                     // Returns the newly created UserCredentials
                     return userCredentials;
                 }

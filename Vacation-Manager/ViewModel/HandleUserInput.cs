@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DiabetesTracker.Logic
+namespace Vacation_Manager.ViewModel
 {
     public static class HandleUserInput
     {

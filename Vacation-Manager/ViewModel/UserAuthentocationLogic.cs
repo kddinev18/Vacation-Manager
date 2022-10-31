@@ -8,7 +8,7 @@ using System.Windows;
 using Vacation_Manager.View.Code_behind.UserAuthenticationWindow;
 #nullable disable
 
-namespace DiabetesTracker.Logic
+namespace Vacation_Manager.ViewModel
 {
     public static class UserAuthentocationLogic
     {

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Vacation_Manager.ViewModel;
 
 namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages
 {
@@ -35,6 +36,7 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             // Register and set the CurrentUserId
+            UserAuthentocationLogic.Register(_userAuthentication, UserName.TextBox.Text, Email.TextBox.Text, PasswordTextBox.Password);
         }
     }
 }

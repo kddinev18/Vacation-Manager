@@ -112,5 +112,31 @@ namespace Server
             client.Client.Close();
             _clients.Remove(client);
         }
+
+        public static void SendCorrenspodingResponse(TcpClient client, int operationNumber, List<string> args)
+        {
+            UserOperation operation = (UserOperation)operationNumber;
+            string response = String.Empty;
+            switch (operation)
+            {
+                case UserOperation.Register:
+                    int userId = Operations.Register(args[0], args[1], args[2]);
+                    response = $"{_success}|{userId}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.LogIn:
+                    response = $"{_success}|{Operations.LogIn(args[0], args[1])}";
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.LogInWithCookies:
+                    response = $"{_success}|{Operations.LogInWithCookies(args[0], args[1])}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

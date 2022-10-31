@@ -100,6 +100,17 @@ namespace Server
             client.Client.BeginReceive(_data, 0, _data.Length, SocketFlags.None, new AsyncCallback(ReciveUserInput), client);
         }
 
+        // Clear the buffer
+        public static void FlushBuffer()
+        {
+            Array.Clear(_data, 0, _data.Length);
+        }
 
+        public static void DisconnectClient(TcpClient client)
+        {
+            client.Client.Shutdown(SocketShutdown.Both);
+            client.Client.Close();
+            _clients.Remove(client);
+        }
     }
 }

@@ -27,4 +27,3 @@ namespace VacationManager
         public virtual ICollection<Vacation> Vacations { get; set; }
     }
 }
-, 

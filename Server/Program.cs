@@ -6,7 +6,13 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Server server = new Server(5400);
+
+            server.ServerSertUp();
+
+            Console.ReadKey();
+
+            server.ServerShutDown();
         }
     }
 }

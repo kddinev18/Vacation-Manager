@@ -95,5 +95,18 @@ namespace BusinessLogicLayer.Logic
             // Returns the newly added user
             return newUser.UserId;
         }
+
+        // Checks if the email is on corrent format
+        private static bool CheckEmail(string email)
+        {
+            // Check if the email does not constains '@'
+            if (email.Contains('@') == false)
+                // If the email does not constains '@' it trows axception
+                throw new ArgumentException("Email must contain \'@\'");
+
+            // Return true otherwise
+            return true;
+        }
+
     }
 }

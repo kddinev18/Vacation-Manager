@@ -37,6 +37,29 @@ namespace BusinessLogicLayer.Logic
                 // Remove the '-' from the hashed data
                 .Replace("-", "");
         }
+        // Generates a random sequence of characters and numbers
+        private static string GetSalt()
+        {
+            StringBuilder salt = new StringBuilder();
+            Random random = new Random();
+            for (int i = 0; i < 16; i++)
+            {
+                // Add another character into the string builder
+                salt.Append
+                    (
+                        // Converts the output to a char
+                        Convert.ToChar
+                        (
+                            // Generate a random nuber between 0 and 26 and add 65 to it
+                            random.Next(0, 26) + 65
+                        )
+                    );
+            }
+
+            // Returns the string builder's string
+            return salt.ToString();
+        }
+
         
     }
 }

@@ -17,8 +17,6 @@ namespace BusinessLogicLayer.Logic
     }
     public static class UserLogic
     {
-        public static VacationManagerDbContext DbContext { get; set; }
-
         // Retuns the hashed data using the SHA256 algorithm
         private static string Hash(string data)
         {
@@ -62,16 +60,23 @@ namespace BusinessLogicLayer.Logic
 
         private static void CheckRolelessRole(VacationManagerDbContext dbContext)
         {
+            // Search if there is a roleless role
             foreach (Role existingRoles in dbContext.Roles)
+                // If there is stop the function
                 if (existingRoles.RoleIdentifier == -1)
                     return;
 
+            // If not create the roleless role
             Role role = new Role()
             {
                 RoleIdentifier = -1
             };
 
+            // Add the role to the context
             dbContext.Roles.Add(role);
+
+            // Save all changes made in this context into the database
+            dbContext.SaveChanges();
         }
 
         // Creates a new user
@@ -154,9 +159,9 @@ namespace BusinessLogicLayer.Logic
         }
 
         // Log in with pre-hashed password
-        public static int LogInWithPreHashedPassword(string username, string preHashedPassword)
+        public static int LogInWithPreHashedPassword(string username, string preHashedPassword, VacationManagerDbContext dbContext)
         {
-            List<User> users = DbContext.Users
+            List<User> users = dbContext.Users
                 // Where the user's username matches the given useraname
                 .Where(u => u.UserName == username)
                 // Convert the result set to a list
@@ -181,11 +186,11 @@ namespace BusinessLogicLayer.Logic
         }
 
         // Returns the user information and logs the user in
-        public static UserCredentials LogIn(string userName, string password)
+        public static UserCredentials LogIn(string userName, string password, VacationManagerDbContext dbContext)
         {
             UserCredentials userCredentials;
 
-            List<User> users = DbContext.Users
+            List<User> users = dbContext.Users
                 // Where the user's username matches the given useraname
                 .Where(u => u.UserName == userName)
                 // Convert the result set to a list

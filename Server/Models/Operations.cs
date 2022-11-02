@@ -25,10 +25,10 @@ namespace Server
             return userId;
         }
 
-        public static string LogIn(string userName, string password)
+        public static string LogIn(string userName, string password, VacationManagerDbContext dBContext)
         {
             // Log in and get sereialisd UserCredentials
-            string serializedResponse = JsonSerializer.Serialize(UserLogic.LogIn(userName, password));
+            string serializedResponse = JsonSerializer.Serialize(UserLogic.LogIn(userName, password, dBContext));
             // Log the operation
             Logger.WriteData(2, "Information", "LogIn");
 
@@ -36,10 +36,10 @@ namespace Server
             return serializedResponse;
         }
 
-        public static int LogInWithCookies(string userName, string password)
+        public static int LogInWithCookies(string userName, string password, VacationManagerDbContext dBContext)
         {
             // Log in the user and get the id of the user
-            int userId = UserLogic.LogInWithPreHashedPassword(userName, password);
+            int userId = UserLogic.LogInWithPreHashedPassword(userName, password, dBContext);
             // Log the operation
             Logger.WriteData(2, "Information", "LogIn");
 

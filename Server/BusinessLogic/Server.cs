@@ -12,10 +12,9 @@ namespace Server
 {
     public class Server
     {
-        private Master masterClass;
-
         private static TcpListener _tcpListener;
         private static List<TcpClient> _clients = new List<TcpClient>();
+        private static Dictionary<TcpClient, VacationManagerDbContext> _dbContexts = new Dictionary<TcpClient, VacationManagerDbContext>();
         // Buffer
         private static byte[] _data = new byte[16777216];
         private int _port;
@@ -25,13 +24,10 @@ namespace Server
         public Server(int port)
         {
             _port = port;
-            masterClass = new Master();
         }
 
         public void ServerSertUp()
         {
-            masterClass.OpenConnection();
-
             _tcpListener = new TcpListener(IPAddress.Any, _port);
             // Starts the server
             _tcpListener.Start();
@@ -41,8 +37,6 @@ namespace Server
 
         public void ServerShutDown()
         {
-            masterClass.CloseConnection();
-
             // Stops the server
             _tcpListener.Stop();
             _tcpListener = null;
@@ -56,6 +50,8 @@ namespace Server
             {
                 // Connect the client
                 client = _tcpListener.EndAcceptTcpClient(asyncResult);
+
+                _dbContexts.Add(client, new VacationManagerDbContext());
             }
             catch (Exception ex)
             {
@@ -63,7 +59,7 @@ namespace Server
                 throw;
             }
 
-            // Add the client newly connect vlient into the _clients list
+            // Add the client newly connect client into the _clients list
             _clients.Add(client);
             // Begin recieving bytes from the client
             client.Client.BeginReceive(_data, 0, _data.Length, SocketFlags.None, new AsyncCallback(ReciveUserInput), client);
@@ -121,29 +117,30 @@ namespace Server
         {
             client.Client.Shutdown(SocketShutdown.Both);
             client.Client.Close();
+            _dbContexts.Remove(client);
             _clients.Remove(client);
         }
 
         public static void SendCorrenspodingResponse(TcpClient client, int operationNumber, List<string> args)
         {
-            VacationManagerDbContext dbContext = new VacationManagerDbContext();
+            //VacationManagerDbContext dbContext = new VacationManagerDbContext();
             UserOperation operation = (UserOperation)operationNumber;
             string response = String.Empty;
             switch (operation)
             {
                 case UserOperation.Register:
-                    int userId = Operations.Register(args[0], args[1], args[2], dbContext);
+                    int userId = Operations.Register(args[0], args[1], args[2], _dbContexts[client]);
                     response = $"{_success}|{userId}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.LogIn:
-                    response = $"{_success}|{Operations.LogIn(args[0], args[1])}";
+                    response = $"{_success}|{Operations.LogIn(args[0], args[1], _dbContexts[client])}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.LogInWithCookies:
-                    response = $"{_success}|{Operations.LogInWithCookies(args[0], args[1])}";
+                    response = $"{_success}|{Operations.LogInWithCookies(args[0], args[1], _dbContexts[client])}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;

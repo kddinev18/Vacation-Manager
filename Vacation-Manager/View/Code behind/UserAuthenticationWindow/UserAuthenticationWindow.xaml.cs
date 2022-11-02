@@ -29,7 +29,7 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
         {
             try
             {
-                //Services.SetUpConnection();
+                Services.SetUpConnection();
                 LogInPage = new LogInPage(this);
                 RegistrationPage = new RegistrationPage(this);
 

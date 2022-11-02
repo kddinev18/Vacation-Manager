@@ -60,13 +60,25 @@ namespace BusinessLogicLayer.Logic
             return salt.ToString();
         }
 
-        // Creates a new user
-        public static int Register(string userName, string email, string password)
+        private static void CheckRolelessRole(VacationManagerDbContext dbContext)
         {
-            // For every existing user check if the email and uername are the same
-            foreach (User existingUser in DbContext.Users)
-                if (existingUser.Email == email || existingUser.UserName == userName)
-                    throw new ArgumentException("There is already a user with that email or username");
+            foreach (Role existingRoles in dbContext.Roles)
+                if (existingRoles.RoleIdentifier == -1)
+                    return;
+
+            Role role = new Role()
+            {
+                RoleIdentifier = -1
+            };
+
+            dbContext.Roles.Add(role);
+        }
+
+        // Creates a new user
+        public static int Register(string userName, string email, string password, VacationManagerDbContext dbContext)
+        {
+            // Add roleless role
+            CheckRolelessRole(dbContext);
 
             // Checks if the email is on corrent format
             CheckEmail(email);
@@ -83,14 +95,16 @@ namespace BusinessLogicLayer.Logic
                 UserName = userName,
                 Password = hashPassword,
                 Email = email,
-                Salt = salt
+                Salt = salt,
             };
+            // Assign roleless role
+            newUser.Role = dbContext.Roles.Where(role => role.RoleIdentifier == -1).FirstOrDefault();
 
             // Add the newly added user into the current context
-            DbContext.Users.Add(newUser);
+            dbContext.Users.Add(newUser);
 
             // Save all changes made in this context into the database
-            DbContext.SaveChanges();
+            dbContext.SaveChanges();
 
             // Returns the newly added user
             return newUser.UserId;

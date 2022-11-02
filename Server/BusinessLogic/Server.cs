@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Vacation_Manager.Data;
 
 namespace Server
 {
@@ -73,6 +74,8 @@ namespace Server
         {
             TcpClient client = asyncResult.AsyncState as TcpClient;
             int reciever;
+            List<string> args;
+
             try
             {
                 // How many bytes has the user sent
@@ -85,7 +88,15 @@ namespace Server
                 }
                 // Get the data
                 string data = Encoding.ASCII.GetString(_data).Replace("\0", String.Empty);
-                Console.WriteLine("data:" + data);
+                try
+                {
+                    args = data.Split('|')[1].Split(", ").ToList();
+                }
+                catch (Exception)
+                {
+                    args = null;
+                }
+                SendCorrenspodingResponse(client, int.Parse(data.Split('|')[0]), args);
             }
             catch (Exception ex)
             {
@@ -115,18 +126,20 @@ namespace Server
 
         public static void SendCorrenspodingResponse(TcpClient client, int operationNumber, List<string> args)
         {
+            VacationManagerDbContext dbContext = new VacationManagerDbContext();
             UserOperation operation = (UserOperation)operationNumber;
             string response = String.Empty;
             switch (operation)
             {
                 case UserOperation.Register:
-                    int userId = Operations.Register(args[0], args[1], args[2]);
+                    int userId = Operations.Register(args[0], args[1], args[2], dbContext);
                     response = $"{_success}|{userId}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.LogIn:
                     response = $"{_success}|{Operations.LogIn(args[0], args[1])}";
+                    // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.LogInWithCookies:

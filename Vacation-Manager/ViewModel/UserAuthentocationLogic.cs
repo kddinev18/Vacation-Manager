@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Vacation_Manager.Models;
 using Vacation_Manager.View.Code_behind.UserAuthenticationWindow;
 #nullable disable
 
@@ -22,9 +23,10 @@ namespace Vacation_Manager.ViewModel
             try
             {
                 // Register and assign the current user id to the id of the user that has just registered
-                
+                CurrentUserInformation.CurrentUserId = Services.Register(userName, email, password);
+
                 // Show FinishRegistrationPage
-                
+
             }
             catch (Exception exception)
             {
@@ -43,9 +45,10 @@ namespace Vacation_Manager.ViewModel
             try
             {
                 // Log in and assign the current user id to the id of the user that has just logged
-                
+                CurrentUserInformation.CurrentUserId = Services.LogIn(userName, password, doRememberMe);
+
                 // Open the main window
-                
+
             }
             catch (Exception exception)
             {

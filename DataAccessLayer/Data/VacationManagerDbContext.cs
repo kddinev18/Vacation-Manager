@@ -38,7 +38,7 @@ namespace Vacation_Manager.Data
         {
             modelBuilder.Entity<Project>(entity =>
             {
-                entity.Property(e => e.ProjectId).ValueGeneratedNever();
+                entity.Property(e => e.ProjectId).UseIdentityColumn(1,1);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -51,7 +51,7 @@ namespace Vacation_Manager.Data
 
                 entity.HasIndex(e => e.TeamId, "IX_ProjectTeams_TeamId");
 
-                entity.Property(e => e.ProjectTeamId).ValueGeneratedNever();
+                entity.Property(e => e.ProjectTeamId).UseIdentityColumn(1, 1);
 
                 entity.HasOne(d => d.Project)
                     .WithMany(p => p.ProjectTeams)
@@ -68,12 +68,12 @@ namespace Vacation_Manager.Data
 
             modelBuilder.Entity<Role>(entity =>
             {
-                entity.Property(e => e.RoleId).ValueGeneratedNever();
+                entity.Property(e => e.RoleId).UseIdentityColumn(1, 1);
             });
 
             modelBuilder.Entity<Team>(entity =>
             {
-                entity.Property(e => e.TeamId).ValueGeneratedNever();
+                entity.Property(e => e.TeamId).UseIdentityColumn(1, 1);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -88,16 +88,10 @@ namespace Vacation_Manager.Data
             {
                 entity.HasIndex(e => e.RoleId, "IX_Users_RoleId");
 
-                entity.Property(e => e.UserId).ValueGeneratedNever();
+                entity.Property(e => e.UserId).UseIdentityColumn(1, 1);
 
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
+                entity.HasIndex(u => u.UserName).IsUnique();
+                entity.HasIndex(u => u.Email).IsUnique();
                 entity.Property(e => e.UserName)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -117,7 +111,7 @@ namespace Vacation_Manager.Data
 
                 entity.HasIndex(e => e.UserId, "IX_UsersTeams_UserId");
 
-                entity.Property(e => e.UserTeamId).ValueGeneratedNever();
+                entity.Property(e => e.UserTeamId).UseIdentityColumn(1, 1);
 
                 entity.HasOne(d => d.Team)
                     .WithMany(p => p.UsersTeams)
@@ -136,7 +130,7 @@ namespace Vacation_Manager.Data
             {
                 entity.HasIndex(e => e.UserId, "IX_Vacations_UserId");
 
-                entity.Property(e => e.VacationId).ValueGeneratedNever();
+                entity.Property(e => e.VacationId).UseIdentityColumn(1, 1);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Vacations)

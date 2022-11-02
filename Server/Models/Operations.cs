@@ -7,15 +7,16 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
+using Vacation_Manager.Data;
 
 namespace Server
 {
     public static class Operations
     {
-        public static int Register(string userName, string email, string password)
+        public static int Register(string userName, string email, string password, VacationManagerDbContext dBContext)
         {
             // Register the user and get the id of the newly registered user
-            int userId = UserLogic.Register(userName, email, password);
+            int userId = UserLogic.Register(userName, email, password, dBContext);
 
             // Log the operation
             Logger.WriteData(2, "Information", $"Register - UserId: {userId}, UserName: {userName}");

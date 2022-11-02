@@ -32,7 +32,7 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages
             // If CurrentUserId is nut null open MainWindow
             if (CurrentUserInformation.CurrentUserId is not null)
             {
-                _userAuthentication.OpenMainWindow();
+                // Open main window
             }
             InitializeComponent();
         }

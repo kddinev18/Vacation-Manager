@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +19,39 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
     /// </summary>
     public partial class VacationManagerMainWindow : Window
     {
+        private bool _isMaximized = false;
         public VacationManagerMainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.ClickCount == 2)
+            {
+                if(_isMaximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.Width = 1080;
+                    this.Height = 720;
+
+                    _isMaximized = false;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+
+                    _isMaximized = true;
+                }
+            }
         }
     }
 }

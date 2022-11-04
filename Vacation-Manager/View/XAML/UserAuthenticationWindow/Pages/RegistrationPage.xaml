@@ -21,7 +21,7 @@
                     <PasswordBox x:Name="PasswordTextBox" Margin="10 0" materialDesign:HintAssist.Hint="********" Foreground="#2b2b2b" Width="250"/>
                 </StackPanel>
                 <StackPanel Margin="10" HorizontalAlignment="Center">
-                    <Button Width="100" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderBrush="#358c57" Background="#FF33AA7C" Foreground="White" ToolTip="Register" x:Name="RegisterButton" Click="RegisterButton_Click" Content="Register"/>
+                    <Button Width="100" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderBrush="#4D49BF" Background="#4E6BBF" Foreground="White" ToolTip="Register" x:Name="RegisterButton" Click="RegisterButton_Click" Content="Register"/>
                 </StackPanel>
                 <Grid Margin="30">
                     <Grid.ColumnDefinitions>
@@ -30,7 +30,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Already have an account?" Foreground="#2b2b2b" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12" Grid.Column="0"/>
-                    <Button Width="70" Height="30" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderBrush="#358c57" Background="#FF33AA7C" Foreground="White" x:Name="OpenLogInFormButton" Click="OpenLogInFormButton_Click" Content="LogIn" FontSize="10" Grid.Column="1"/>
+                    <Button Width="70" Height="30" Style="{StaticResource MaterialDesignRaisedButton}" materialDesign:ButtonAssist.CornerRadius="10" BorderBrush="#4D49BF" Background="#4E6BBF" Foreground="White" x:Name="OpenLogInFormButton" Click="OpenLogInFormButton_Click" Content="LogIn" FontSize="10" Grid.Column="1"/>
                 </Grid>
             </StackPanel>
         </StackPanel>

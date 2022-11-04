@@ -33,6 +33,7 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages
             if (CurrentUserInformation.CurrentUserId is not null)
             {
                 // Open main window
+                _userAuthentication.ShowMainWindow();
             }
             InitializeComponent();
         }

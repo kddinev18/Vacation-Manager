@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\example-8.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\example-8.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
   </ItemGroup>
@@ -19,6 +27,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="View\Code behind\MainWindow\Pages\" />
+    <Folder Include="View\XAML\MainWindow\Pages\" />
   </ItemGroup>
 
 </Project>

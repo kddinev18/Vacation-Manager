@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages;
+using Vacation_Manager.View.Code_behind.MainWindow;
 
 namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
 {
@@ -45,6 +46,12 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
         public void ShowPage(Page page)
         {
             Forms.Content = page;
+        }
+        public void ShowMainWindow()
+        {
+            VacationManagerMainWindow mainWindow = new VacationManagerMainWindow();
+            mainWindow.Show();
+            this.Close();
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

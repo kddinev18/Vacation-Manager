@@ -25,7 +25,8 @@ namespace Vacation_Manager.ViewModel
                 // Register and assign the current user id to the id of the user that has just registered
                 CurrentUserInformation.CurrentUserId = Services.Register(userName, email, password);
 
-                // Show FinishRegistrationPage
+                // Open the main window
+                userAuthentication.ShowMainWindow();
 
             }
             catch (Exception exception)
@@ -48,7 +49,7 @@ namespace Vacation_Manager.ViewModel
                 CurrentUserInformation.CurrentUserId = Services.LogIn(userName, password, doRememberMe);
 
                 // Open the main window
-
+                userAuthentication.ShowMainWindow();
             }
             catch (Exception exception)
             {

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Vacation_Manager.View.Code_behind.AddMember;
+using Vacation_Manager.View.Code_behind.MainWindow.Pages;
 
 namespace Vacation_Manager.View.Code_behind.MainWindow
 {
@@ -21,9 +22,17 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
     public partial class VacationManagerMainWindow : Window
     {
         private bool _isMaximized = false;
+        public MembersPage MembersPage { get; set; }
         public VacationManagerMainWindow()
         {
             InitializeComponent();
+            MembersPage = new MembersPage();
+            ShowPage(MembersPage);
+        }
+
+        public void ShowPage(Page page)
+        {
+            MainWindowFrame.Content = page;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -53,12 +62,6 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
                     _isMaximized = true;
                 }
             }
-        }
-
-        private void AddMembersButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddMemberWindow addMemberWindow = new AddMemberWindow();
-            addMemberWindow.Show();
         }
     }
 }

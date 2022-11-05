@@ -29,9 +29,4 @@
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="View\Code behind\MainWindow\Pages\" />
-    <Folder Include="View\XAML\MainWindow\Pages\" />
-  </ItemGroup>
-
 </Project>

@@ -43,10 +43,19 @@
                         <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
                         <!--Menu Buttons-->
                         <StackPanel DockPanel.Dock="Top">
+                            <Button Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Dashboard"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel DockPanel.Dock="Top">
                             <Button Style="{StaticResource menuButton}" Background="#7b5cd6" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Dashboard"/>
+                                    <Icon:PackIconMaterial Kind="Account" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Members"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -54,8 +63,8 @@
                         <StackPanel DockPanel.Dock="Top">
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Dashboard"/>
+                                    <Icon:PackIconMaterial Kind="Memory" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Projects"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -63,17 +72,8 @@
                         <StackPanel DockPanel.Dock="Top">
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Dashboard"/>
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
-
-                        <StackPanel DockPanel.Dock="Top">
-                            <Button Style="{StaticResource menuButton}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Dashboard"/>
+                                    <Icon:PackIconMaterial Kind="AspectRatio" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Teams"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -81,8 +81,8 @@
                         <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Margin="15 0 0 20">
                             <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Dashboard"/>
+                                    <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Log Out"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -122,7 +122,7 @@
                 <TextBlock Text="Members" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
                 
                 <!--Add Button-->
-                <Button Style="{StaticResource addButton}">
+                <Button Style="{StaticResource addButton}" Click="AddMembersButton_Click">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
                         <TextBlock Text="Add new Member"/>
@@ -132,15 +132,8 @@
                 <!--Separator-->
                 <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
                 
-                <!--Tap Buttons-->
-                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0">
-                    <Button Content="Club Staff" Style="{StaticResource tabButton}" BorderBrush="#784ff2"/>
-                    <Button Content="Club Staff" Style="{StaticResource tabButton}"/>
-                    <Button Content="Club Staff" Style="{StaticResource tabButton}"/>
-                </StackPanel>
-                
                 <!--Counter Title-->
-                <TextBlock Text="Lorem Ipsum" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="Members list:" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Text="Lorem Ipsum" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0" Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                 <!--Filter Textbox-->

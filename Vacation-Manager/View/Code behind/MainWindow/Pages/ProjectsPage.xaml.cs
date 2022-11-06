@@ -24,5 +24,10 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         {
             InitializeComponent();
         }
+
+        private void AddProjectsButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

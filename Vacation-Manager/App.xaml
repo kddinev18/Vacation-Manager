@@ -63,6 +63,10 @@
                         <Setter Property="Background" Value="#7b5cd6"/>
                         <Setter Property="Foreground" Value="#FFFFFF"/>
                     </Trigger>
+                    <Trigger Property="IsMouseCaptured" Value="True">
+                        <Setter Property="Background" Value="#7b5cd6"/>
+                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                    </Trigger>
                 </Style.Triggers>
             </Style>
 

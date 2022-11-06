@@ -23,10 +23,16 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
     {
         private bool _isMaximized = false;
         public MembersPage MembersPage { get; set; }
+        public DashboardPage DashboardPage { get; set; }
+        public ProjectsPage ProjectsPage { get; set; }
+        public TeamsPage TeamsPage { get; set; }
         public VacationManagerMainWindow()
         {
             InitializeComponent();
             MembersPage = new MembersPage();
+            DashboardPage = new DashboardPage();
+            ProjectsPage = new ProjectsPage();
+            TeamsPage = new TeamsPage();
             ShowPage(MembersPage);
         }
 
@@ -62,6 +68,31 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
                     _isMaximized = true;
                 }
             }
+        }
+
+        private void DashboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPage(DashboardPage);
+        }
+
+        private void MembersButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPage(MembersPage);
+        }
+
+        private void ProjectsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPage(ProjectsPage);
+        }
+
+        private void TeamsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPage(TeamsPage);
+        }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

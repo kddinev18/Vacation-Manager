@@ -72,6 +72,10 @@
 
                 <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="Auto"/>
 
+                <DataGridTextColumn Header="Position" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Phone" IsReadOnly="True" Width="*"/>
+
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -86,11 +90,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                <DataGridTextColumn Header="Position" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Phone" IsReadOnly="True" Width="*"/>
-
 
             </DataGrid.Columns>
         </DataGrid>

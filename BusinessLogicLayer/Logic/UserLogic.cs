@@ -58,18 +58,18 @@ namespace BusinessLogicLayer.Logic
             return salt.ToString();
         }
 
-        private static void CheckRolelessRole(VacationManagerContext dbContext)
+        private static void CheckMasterRole(VacationManagerContext dbContext)
         {
-            // Search if there is a roleless role
+            // Search if there is a master role
             foreach (Role existingRoles in dbContext.Roles)
                 // If there is stop the function
-                if (existingRoles.RoleIdentificator == -1)
+                if (existingRoles.RoleIdentificator == 0)
                     return;
 
             // If not create the roleless role
             Role role = new Role()
             {
-                RoleIdentificator = -1
+                RoleIdentificator = 0
             };
 
             // Add the role to the context
@@ -83,7 +83,7 @@ namespace BusinessLogicLayer.Logic
         public static int Register(string userName, string email, string password, VacationManagerContext dbContext)
         {
             // Add roleless role
-            CheckRolelessRole(dbContext);
+            CheckMasterRole(dbContext);
 
             // Checks if the email is on corrent format
             CheckEmail(email);

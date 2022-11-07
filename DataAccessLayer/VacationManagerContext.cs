@@ -56,7 +56,8 @@ namespace DataAccessLayer
                     .WithMany(p => p.Teams)
                     .HasForeignKey(d => d.ProjectId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Teams_Projects");
+                    .HasConstraintName("FK_Teams_Projects")
+                    .IsRequired(false);
             });
 
             modelBuilder.Entity<User>(entity =>

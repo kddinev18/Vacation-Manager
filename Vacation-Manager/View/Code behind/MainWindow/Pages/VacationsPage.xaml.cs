@@ -12,25 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Vacation_Manager.Models;
-using Vacation_Manager.View.Code_behind.AddMember;
 
 namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
 {
     /// <summary>
-    /// Interaction logic for MembersPage.xaml
+    /// Interaction logic for VacationsPage.xaml
     /// </summary>
-    public partial class MembersPage : Page
+    public partial class VacationsPage : Page
     {
-        public MembersPage()
+        public VacationsPage()
         {
             InitializeComponent();
         }
 
-        private void AddMembersButton_Click(object sender, RoutedEventArgs e)
+        private void RequestVacationButton_Click(object sender, RoutedEventArgs e)
         {
-            AddMemberWindow addMemberWindow = new AddMemberWindow();
-            addMemberWindow.Show();
+
         }
     }
 }

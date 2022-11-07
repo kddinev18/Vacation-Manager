@@ -21,8 +21,8 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages
     /// </summary>
     public partial class RegistrationPage : Page
     {
-        private UserAuthenticationWindow _userAuthentication;
-        public RegistrationPage(UserAuthenticationWindow userAuthentication)
+        private UsersAuthenticationWindow _userAuthentication;
+        public RegistrationPage(UsersAuthenticationWindow userAuthentication)
         {
             _userAuthentication = userAuthentication;
             InitializeComponent();

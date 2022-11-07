@@ -15,6 +15,12 @@ namespace BusinessLogicLayer.Logic
         public string UserName { get; set; }
         public string HashedPassword { get; set; }
     }
+
+    public class UserAuthorisations
+    {
+        public int Id { get; set; }
+        public int RoleIdentificator { get; set; }
+    }
     public static class UserLogic
     {
         // Retuns the hashed data using the SHA256 algorithm
@@ -58,18 +64,19 @@ namespace BusinessLogicLayer.Logic
             return salt.ToString();
         }
 
+        // Checks if there is a master role> if there isn't, it adds it
         private static void CheckMasterRole(VacationManagerContext dbContext)
         {
             // Search if there is a master role
             foreach (Role existingRoles in dbContext.Roles)
                 // If there is stop the function
-                if (existingRoles.RoleIdentificator == 0)
+                if (existingRoles.RoleIdentificator == 1)
                     return;
 
             // If not create the roleless role
             Role role = new Role()
             {
-                RoleIdentificator = 0
+                RoleIdentificator = 1
             };
 
             // Add the role to the context
@@ -82,7 +89,7 @@ namespace BusinessLogicLayer.Logic
         // Creates a new user
         public static int Register(string userName, string email, string password, VacationManagerContext dbContext)
         {
-            // Add roleless role
+            // Add master role
             CheckMasterRole(dbContext);
 
             // Checks if the email is on corrent format
@@ -103,7 +110,7 @@ namespace BusinessLogicLayer.Logic
                 Salt = salt,
             };
             // Assign roleless role
-            newUser.Role = dbContext.Roles.Where(role => role.RoleIdentificator == -1).FirstOrDefault();
+            newUser.Role = dbContext.Roles.Where(role => role.RoleIdentificator == 1).FirstOrDefault();
 
             // Add the newly added user into the current context
             dbContext.Users.Add(newUser);
@@ -220,6 +227,12 @@ namespace BusinessLogicLayer.Logic
             }
             // Throws exception if the user couldn't log in
             throw new ArgumentException("Your password or username is incorrect");
+        }
+
+        // Checks weather a user has the permissions to perform a specific action
+        public static bool CheckAuthorisation(int userId, VacationManagerContext dbContext)
+        {
+            return dbContext.Users.Where(user => user.UserId == userId).First().Role.RoleIdentificator == 1;
         }
     }
 }

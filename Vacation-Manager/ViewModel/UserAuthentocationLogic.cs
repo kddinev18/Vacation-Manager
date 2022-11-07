@@ -14,7 +14,7 @@ namespace Vacation_Manager.ViewModel
     public static class UserAuthentocationLogic
     {
         // Add user profile
-        public static void Register(UserAuthenticationWindow userAuthentication, string userName, string email, string password)
+        public static void Register(UsersAuthenticationWindow userAuthentication, string userName, string email, string password)
         {
             //Checks the user input
             if (!HandleUserInput.GeneralHandler(userName, email, password))
@@ -37,7 +37,7 @@ namespace Vacation_Manager.ViewModel
             }
         }
 
-        public static void LogIn(UserAuthenticationWindow userAuthentication, string userName, string password, bool doRememberMe)
+        public static void LogIn(UsersAuthenticationWindow userAuthentication, string userName, string password, bool doRememberMe)
         {
             //Checks the user input
             if (!HandleUserInput.GeneralHandler(userName, password))
@@ -57,6 +57,11 @@ namespace Vacation_Manager.ViewModel
                 MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+        }
+
+        public static void LogOut()
+        {
+            Services.RemoveCookies();
         }
     }
 }

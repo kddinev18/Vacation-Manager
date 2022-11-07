@@ -10,7 +10,7 @@ namespace ServiceLayer
     {
         private static byte[] _data = new byte[16777216];
         private static TcpClient _tcpClient;
-        private readonly static string _userCredentialsPath = @$"{Directory.GetCurrentDirectory()}/DiabetesTrackerCredentials.txt";
+        private readonly static string _userCredentialsPath = @$"{Directory.GetCurrentDirectory()}/VacationManagerCredentials.txt";
 
         // Connect to the server
         public static void SetUpConnection()

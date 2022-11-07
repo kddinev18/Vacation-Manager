@@ -23,8 +23,8 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages
     /// </summary>
     public partial class LogInPage : Page
     {
-        private UserAuthenticationWindow _userAuthentication;
-        public LogInPage(UserAuthenticationWindow userAuthentication)
+        private UsersAuthenticationWindow _userAuthentication;
+        public LogInPage(UsersAuthenticationWindow userAuthentication)
         {
             _userAuthentication = userAuthentication;
             // Logs with user credentials txt file

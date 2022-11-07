@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Vacation_Manager.View.Code_behind.AddMember;
 using Vacation_Manager.View.Code_behind.MainWindow.Pages;
+using Vacation_Manager.View.Code_behind.UserAuthenticationWindow;
+using Vacation_Manager.ViewModel;
 
 namespace Vacation_Manager.View.Code_behind.MainWindow
 {
@@ -26,6 +28,7 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
         public DashboardPage DashboardPage { get; set; }
         public ProjectsPage ProjectsPage { get; set; }
         public TeamsPage TeamsPage { get; set; }
+        public VacationsPage VacationsPage { get; set; }
         public VacationManagerMainWindow()
         {
             InitializeComponent();
@@ -33,6 +36,7 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
             DashboardPage = new DashboardPage();
             ProjectsPage = new ProjectsPage();
             TeamsPage = new TeamsPage();
+            VacationsPage = new VacationsPage();
             ShowPage(MembersPage);
         }
 
@@ -90,9 +94,17 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
             ShowPage(TeamsPage);
         }
 
+        private void VacationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPage(VacationsPage);
+        }
+
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            UsersAuthenticationWindow window = new UsersAuthenticationWindow();
+            UserAuthentocationLogic.LogOut();
+            window.Show();
+            this.Close();
         }
     }
 }

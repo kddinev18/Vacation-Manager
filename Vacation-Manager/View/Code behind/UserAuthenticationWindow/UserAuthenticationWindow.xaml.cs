@@ -21,12 +21,12 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class UserAuthenticationWindow : Window
+    public partial class UsersAuthenticationWindow : Window
     {
         public LogInPage LogInPage { get; set; }
         public RegistrationPage RegistrationPage { get; set; }
 
-        public UserAuthenticationWindow()
+        public UsersAuthenticationWindow()
         {
             try
             {

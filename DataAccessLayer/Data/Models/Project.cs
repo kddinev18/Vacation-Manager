@@ -3,18 +3,19 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace VacationManager
+namespace DataAccessLayer.Data.Model
 {
     public partial class Project
     {
         public Project()
         {
-            ProjectTeams = new HashSet<ProjectTeam>();
+            Teams = new HashSet<Team>();
         }
 
         public int ProjectId { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
 
-        public virtual ICollection<ProjectTeam> ProjectTeams { get; set; }
+        public virtual ICollection<Team> Teams { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Vacation_Manager.Data;
+using DataAccessLayer;
 
 namespace Server
 {
@@ -14,7 +14,7 @@ namespace Server
     {
         private static TcpListener _tcpListener;
         private static List<TcpClient> _clients = new List<TcpClient>();
-        private static Dictionary<TcpClient, VacationManagerDbContext> _dbContexts = new Dictionary<TcpClient, VacationManagerDbContext>();
+        private static Dictionary<TcpClient, VacationManagerContext> _dbContexts = new Dictionary<TcpClient, VacationManagerContext>();
         // Buffer
         private static byte[] _data = new byte[16777216];
         private int _port;
@@ -51,7 +51,7 @@ namespace Server
                 // Connect the client
                 client = _tcpListener.EndAcceptTcpClient(asyncResult);
 
-                _dbContexts.Add(client, new VacationManagerDbContext());
+                _dbContexts.Add(client, new VacationManagerContext());
             }
             catch (Exception ex)
             {

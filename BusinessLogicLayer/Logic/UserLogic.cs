@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Vacation_Manager.Data;
-using VacationManager;
+using DataAccessLayer.Data.Model;
+using DataAccessLayer;
 
 namespace BusinessLogicLayer.Logic
 {
@@ -58,18 +58,18 @@ namespace BusinessLogicLayer.Logic
             return salt.ToString();
         }
 
-        private static void CheckRolelessRole(VacationManagerDbContext dbContext)
+        private static void CheckRolelessRole(VacationManagerContext dbContext)
         {
             // Search if there is a roleless role
             foreach (Role existingRoles in dbContext.Roles)
                 // If there is stop the function
-                if (existingRoles.RoleIdentifier == -1)
+                if (existingRoles.RoleIdentificator == -1)
                     return;
 
             // If not create the roleless role
             Role role = new Role()
             {
-                RoleIdentifier = -1
+                RoleIdentificator = -1
             };
 
             // Add the role to the context
@@ -80,7 +80,7 @@ namespace BusinessLogicLayer.Logic
         }
 
         // Creates a new user
-        public static int Register(string userName, string email, string password, VacationManagerDbContext dbContext)
+        public static int Register(string userName, string email, string password, VacationManagerContext dbContext)
         {
             // Add roleless role
             CheckRolelessRole(dbContext);
@@ -103,7 +103,7 @@ namespace BusinessLogicLayer.Logic
                 Salt = salt,
             };
             // Assign roleless role
-            newUser.Role = dbContext.Roles.Where(role => role.RoleIdentifier == -1).FirstOrDefault();
+            newUser.Role = dbContext.Roles.Where(role => role.RoleIdentificator == -1).FirstOrDefault();
 
             // Add the newly added user into the current context
             dbContext.Users.Add(newUser);
@@ -159,7 +159,7 @@ namespace BusinessLogicLayer.Logic
         }
 
         // Log in with pre-hashed password
-        public static int LogInWithPreHashedPassword(string username, string preHashedPassword, VacationManagerDbContext dbContext)
+        public static int LogInWithPreHashedPassword(string username, string preHashedPassword, VacationManagerContext dbContext)
         {
             List<User> users = dbContext.Users
                 // Where the user's username matches the given useraname
@@ -186,7 +186,7 @@ namespace BusinessLogicLayer.Logic
         }
 
         // Returns the user information and logs the user in
-        public static UserCredentials LogIn(string userName, string password, VacationManagerDbContext dbContext)
+        public static UserCredentials LogIn(string userName, string password, VacationManagerContext dbContext)
         {
             UserCredentials userCredentials;
 

@@ -7,13 +7,13 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
-using Vacation_Manager.Data;
+using DataAccessLayer;
 
 namespace Server
 {
     public static class Operations
     {
-        public static int Register(string userName, string email, string password, VacationManagerDbContext dBContext)
+        public static int Register(string userName, string email, string password, VacationManagerContext dBContext)
         {
             // Register the user and get the id of the newly registered user
             int userId = UserLogic.Register(userName, email, password, dBContext);
@@ -25,7 +25,7 @@ namespace Server
             return userId;
         }
 
-        public static string LogIn(string userName, string password, VacationManagerDbContext dBContext)
+        public static string LogIn(string userName, string password, VacationManagerContext dBContext)
         {
             // Log in and get sereialisd UserCredentials
             string serializedResponse = JsonSerializer.Serialize(UserLogic.LogIn(userName, password, dBContext));
@@ -36,7 +36,7 @@ namespace Server
             return serializedResponse;
         }
 
-        public static int LogInWithCookies(string userName, string password, VacationManagerDbContext dBContext)
+        public static int LogInWithCookies(string userName, string password, VacationManagerContext dBContext)
         {
             // Log in the user and get the id of the user
             int userId = UserLogic.LogInWithPreHashedPassword(userName, password, dBContext);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace VacationManager
+namespace DataAccessLayer.Data.Model
 {
     public partial class User
     {

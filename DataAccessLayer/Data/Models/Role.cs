@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace VacationManager
+namespace DataAccessLayer.Data.Model
 {
     public partial class Role
     {
@@ -13,7 +13,7 @@ namespace VacationManager
         }
 
         public int RoleId { get; set; }
-        public int RoleIdentifier { get; set; }
+        public int RoleIdentificator { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
     }

@@ -268,7 +268,8 @@ namespace BusinessLogicLayer.Logic
         // Checks weather a user has the permissions to perform a specific action
         public static bool CheckAuthorisation(int userId, VacationManagerContext dbContext)
         {
-            return dbContext.Users.Where(user => user.UserId == userId).First().Role.RoleIdentificator == "Master";
+            int roleId = dbContext.Users.Where(user => user.UserId == userId).First().RoleId;
+            return dbContext.Roles.Where(role=>role.RoleId == roleId).First().RoleIdentificator == "Master";
         }
 
         public static ICollection<UserInformation> GetUsers(int userId, int pagingSize, int skipAmount, VacationManagerContext dbContext)

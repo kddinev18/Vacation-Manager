@@ -24,6 +24,10 @@ namespace Vacation_Manager.ViewModel
             {
                 // Register and assign the current user id to the id of the user that has just registered
                 CurrentUserInformation.CurrentUserId = Services.Register(userName, email, password);
+                if (CurrentUserInformation.CurrentUserId.HasValue)
+                {
+                    CurrentUserInformation.IsAdmin = Services.CheckAuthentication(CurrentUserInformation.CurrentUserId.Value);
+                }
 
                 // Open the main window
                 userAuthentication.ShowMainWindow();
@@ -47,9 +51,32 @@ namespace Vacation_Manager.ViewModel
             {
                 // Log in and assign the current user id to the id of the user that has just logged
                 CurrentUserInformation.CurrentUserId = Services.LogIn(userName, password, doRememberMe);
+                if (CurrentUserInformation.CurrentUserId.HasValue)
+                {
+                    CurrentUserInformation.IsAdmin = Services.CheckAuthentication(CurrentUserInformation.CurrentUserId.Value);
+                }
 
                 // Open the main window
                 userAuthentication.ShowMainWindow();
+            }
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        public static void LogInWithCookies()
+        {
+            try
+            {
+                // Log in and assign the current user id to the id of the user that has just logged
+                CurrentUserInformation.CurrentUserId = Services.LogInWithCookies();
+                if(CurrentUserInformation.CurrentUserId.HasValue)
+                {
+                    CurrentUserInformation.IsAdmin = Services.CheckAuthentication(CurrentUserInformation.CurrentUserId.Value);
+                }
             }
             catch (Exception exception)
             {

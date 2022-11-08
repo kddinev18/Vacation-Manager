@@ -70,5 +70,9 @@ namespace Server
         {
             UserLogic.EditUser(userId, email, role, dbContext);
         }
+        public static bool CheckAuthentication(int userId, VacationManagerContext dbContext)
+        {
+            return UserLogic.CheckAuthorisation(userId, dbContext);
+        }
     }
 }

@@ -91,6 +91,12 @@ namespace ServiceLayer
         {
             ClientToServerComunication($"{(int)UserOperation.EditUser}|{userId}, {email}, {role}");
         }
+        public static bool CheckAuthentication(int userId)
+        {
+            string serialisedData = ClientToServerComunication($"{(int)UserOperation.CheckAuthentication}|{userId}");
+
+            return bool.Parse(serialisedData.Split('|')[1]);
+        }
         public static int LogIn(string userName, string password, bool doRememberMe)
         {
             string serialisedData = ClientToServerComunication($"{(int)UserOperation.LogIn}|{userName}, {password}");

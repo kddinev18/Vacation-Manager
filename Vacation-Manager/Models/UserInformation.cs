@@ -16,5 +16,9 @@ namespace Vacation_Manager.Models
 
         public Brush BgColor { get; set; }
         public string Initials { get; set; }
+
+        public bool EditButton { get; set; } = false;
+        public bool RemoveButton { get; set; } = false;
+
     }
 }

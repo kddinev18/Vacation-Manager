@@ -28,7 +28,7 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages
         {
             _userAuthentication = userAuthentication;
             // Logs with user credentials txt file
-            CurrentUserInformation.CurrentUserId = Services.LogInWithCookies();
+            UserAuthentocationLogic.LogInWithCookies();
             // If CurrentUserId is nut null open MainWindow
             if (CurrentUserInformation.CurrentUserId is not null)
             {

@@ -10,6 +10,6 @@ namespace Vacation_Manager.Models
     public static class CurrentUserInformation
     {
         public static int? CurrentUserId { get; set; }
-        public static int? RoleIdentificator { get; set; }
+        public static bool IsAdmin { get; set; }
     }
 }

@@ -166,16 +166,22 @@ namespace Server
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.RemoveUser:
-                    // Generate response
                     Operations.RemoveUser(int.Parse(args[0]),_dbContexts[client]);
+                    // Generate response
                     response = $"{_success}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.EditUser:
-                    // Generate response
                     Operations.EditUser(int.Parse(args[0]), args[1], args[2], _dbContexts[client]);
+                    // Generate response
                     response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.CheckAuthentication:
+                    // Generate response
+                    response = $"{_success}|{Operations.CheckAuthentication(int.Parse(args[0]), _dbContexts[client])}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;

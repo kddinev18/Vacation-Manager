@@ -26,6 +26,8 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
     /// </summary>
     public partial class MembersPage : Page
     {
+        public bool EditButton { get; set; } = false;
+        public bool RemoveButton { get; set; } = false;
         private ObservableCollection<UserInformation> _usersInformation;
         private int _userCount;
         private int _pagingSize = 10;
@@ -35,6 +37,10 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         public MembersPage()
         {
             InitializeComponent();
+            if (!CurrentUserInformation.IsAdmin)
+            {
+                AddMembersButton.IsEnabled = false;
+            }
 
             _userCount = UserLogic.GetUserCount()-1;
             _numberOfPages = (int)Math.Ceiling((double)_userCount / _pagingSize);
@@ -58,6 +64,8 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
             {
                 userInformation.BgColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255)));
                 userInformation.Initials = userInformation.UserName.Substring(0, 1);
+                userInformation.EditButton = CurrentUserInformation.IsAdmin;
+                userInformation.RemoveButton = CurrentUserInformation.IsAdmin;
             }
             MemberDataGrid.ItemsSource = _usersInformation;
         }

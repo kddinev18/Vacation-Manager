@@ -10,5 +10,6 @@
         GetUserCount = 6,
         RemoveUser = 7,
         EditUser = 8,
+        CheckAuthentication = 9,
     }
 }

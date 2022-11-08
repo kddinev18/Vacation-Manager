@@ -83,6 +83,10 @@ namespace ServiceLayer
 
             return int.Parse(serialisedData.Split('|')[1]);
         }
+        public static void RemoveUser(int userId)
+        {
+            ClientToServerComunication($"{(int)UserOperation.RemoveUser}|{userId}");
+        }
         public static int LogIn(string userName, string password, bool doRememberMe)
         {
             string serialisedData = ClientToServerComunication($"{(int)UserOperation.LogIn}|{userName}, {password}");

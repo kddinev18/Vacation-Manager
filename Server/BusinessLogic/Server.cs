@@ -165,6 +165,13 @@ namespace Server
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
+                case UserOperation.RemoveUser:
+                    // Generate response
+                    Operations.RemoveUser(int.Parse(args[0]),_dbContexts[client]);
+                    response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
                 default:
                     break;
             }

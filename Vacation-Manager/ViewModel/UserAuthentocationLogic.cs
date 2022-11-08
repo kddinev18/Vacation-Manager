@@ -70,17 +70,8 @@ namespace Vacation_Manager.ViewModel
             if (!HandleUserInput.GeneralHandler(userName, email, password, roleIdentificator))
                 return;
 
-            try
-            {
-                // Register the user into the database
-                Services.RegisterMember(userName, email, password, roleIdentificator);
-            }
-            catch (Exception exception)
-            {
-                // Show error message box
-                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            // Register the user into the database
+            Services.RegisterMember(userName, email, password, roleIdentificator);
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Vacation_Manager.View.Code_behind.MainWindow.Pages;
 using Vacation_Manager.ViewModel;
 
 namespace Vacation_Manager.View.Code_behind.AddMember
@@ -23,19 +24,37 @@ namespace Vacation_Manager.View.Code_behind.AddMember
     public partial class AddMemberWindow : Window
     {
         private bool _isMaximized = false;
-        public AddMemberWindow()
+        private MembersPage _membersPage;
+
+        public static bool isOpened = false;
+        public AddMemberWindow(MembersPage membersPage)
         {
+            _membersPage = membersPage;
             InitializeComponent();
+            isOpened = true;
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            UserAuthentocationLogic.RegisterMember(UserName.TextBox.Text, Email.TextBox.Text, PasswordTextBox.Password, Role.TextBox.Text);
-            this.Close();
+            try
+            {
+                // Register the user into the database
+                UserAuthentocationLogic.RegisterMember(UserName.TextBox.Text, Email.TextBox.Text, PasswordTextBox.Password, Role.TextBox.Text);
+                _membersPage.UpdateDataGrid(1);
+                isOpened = false;
+                this.Close();
+            }
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            isOpened = false;
             this.Close();
         }
 

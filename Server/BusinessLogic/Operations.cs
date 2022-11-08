@@ -61,5 +61,10 @@ namespace Server
         {
             return UserLogic.GetUserCount(dbContext);
         }
+
+        public static void RemoveUser(int userId, VacationManagerContext dbContext)
+        {
+            UserLogic.RemoveUser(userId, dbContext);
+        }
     }
 }

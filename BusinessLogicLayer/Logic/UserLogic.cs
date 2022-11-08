@@ -74,7 +74,7 @@ namespace BusinessLogicLayer.Logic
             foreach (Role existingRoles in dbContext.Roles)
                 // If there is stop the function
                 if (existingRoles.RoleIdentificator == "Master")
-                    return;
+                    throw new AccessViolationException("Thete is already registered admin in this system. Please contact your administrator");
 
             // If not create the roleless role
             Role role = new Role()
@@ -294,6 +294,12 @@ namespace BusinessLogicLayer.Logic
         public static int GetUserCount(VacationManagerContext dbContext)
         {
             return dbContext.Users.Count();
+        }
+
+        public static void RemoveUser(int userId, VacationManagerContext dbContext)
+        {
+            dbContext.Users.Remove(dbContext.Users.Where(user=>user.UserId == userId).First());
+            dbContext.SaveChanges();
         }
     }
 }

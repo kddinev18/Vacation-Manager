@@ -40,5 +40,18 @@ namespace Vacation_Manager.ViewModel
                 return 0;
             }
         }
+
+        public static void RemoveUser(int userId)
+        {
+            try
+            {
+                Services.RemoveUser(userId);
+            }
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

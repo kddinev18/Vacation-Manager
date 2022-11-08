@@ -8,5 +8,6 @@
         RegisterMember = 4,
         GetUsers = 5,
         GetUserCount = 6,
+        RemoveUser = 7,
     }
 }

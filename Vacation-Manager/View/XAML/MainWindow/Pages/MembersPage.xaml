@@ -60,7 +60,7 @@
         </Grid>
 
         <!--Members Datagrid-->
-        <DataGrid Grid.Row="5" x:Name="MemberDataGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+        <DataGrid Grid.Row="5" x:Name="MemberDataGrid" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn CanUserReorder="False" Width="auto" >
                     <DataGridCheckBoxColumn.HeaderTemplate>
@@ -93,10 +93,10 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridEditButton}">
+                                <Button Style="{StaticResource gridEditButton}" x:Name="EditButton" Click="EditButton_Click">
                                     <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                 </Button>
-                                <Button Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                <Button Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0" x:Name="RemoveButton" Click="RemoveButton_Click">
                                     <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                 </Button>
                             </StackPanel>

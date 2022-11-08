@@ -51,5 +51,15 @@ namespace Server
         {
             UserLogic.RegisterMember(userName, email, password, roleIdentificator, dbContext);
         }
+
+        public static string GetUsers(int userId, int pagingSize, int skipAmount, VacationManagerContext dbContext)
+        {
+            return JsonSerializer.Serialize(UserLogic.GetUsers(userId, pagingSize, skipAmount, dbContext));
+        }
+
+        public static int GetUserCount(VacationManagerContext dbContext)
+        {
+            return UserLogic.GetUserCount(dbContext);
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using DataAccessLayer.Data.Model;
 using DataAccessLayer;
+using System.Collections.ObjectModel;
 
 namespace BusinessLogicLayer.Logic
 {
@@ -16,10 +17,12 @@ namespace BusinessLogicLayer.Logic
         public string HashedPassword { get; set; }
     }
 
-    public class UserAuthorisations
+    public class UserInformation
     {
         public int Id { get; set; }
-        public int RoleIdentificator { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string RoleIdentificator { get; set; }
     }
     public static class UserLogic
     {
@@ -265,6 +268,32 @@ namespace BusinessLogicLayer.Logic
         public static bool CheckAuthorisation(int userId, VacationManagerContext dbContext)
         {
             return dbContext.Users.Where(user => user.UserId == userId).First().Role.RoleIdentificator == "Master";
+        }
+
+        public static ICollection<UserInformation> GetUsers(int userId, int pagingSize, int skipAmount, VacationManagerContext dbContext)
+        {
+            // Create a nested context that will be used to retireve role's identificator
+            VacationManagerContext nestedDbContext = new VacationManagerContext();
+            // Retrieve the next 10 rows of the table users
+            IEnumerable<User> users = dbContext.Users.Where(user => user.UserId != userId).Skip(skipAmount).Take(pagingSize);
+            ICollection<UserInformation> usersInformation = new List<UserInformation>();
+            foreach (User user in users)
+            {
+                usersInformation.Add(new UserInformation()
+                {
+                    Id = user.UserId,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    RoleIdentificator = nestedDbContext.Roles.Where(role => role.RoleId == user.RoleId).First().RoleIdentificator
+                });
+            }
+
+            return usersInformation;
+        }
+
+        public static int GetUserCount(VacationManagerContext dbContext)
+        {
+            return dbContext.Users.Count();
         }
     }
 }

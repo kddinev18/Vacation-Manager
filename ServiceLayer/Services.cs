@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
-
 namespace ServiceLayer
 {
     public class Services
@@ -72,6 +72,16 @@ namespace ServiceLayer
         public static void RegisterMember(string userName, string email, string password, string roleIdentificator)
         {
             ClientToServerComunication($"{(int)UserOperation.RegisterMember}|{userName}, {email}, {password}, {roleIdentificator}");
+        }
+        public static string GetUsers(int userId, int pagingSize, int skipAmount)
+        {
+            return ClientToServerComunication($"{(int)UserOperation.GetUsers}|{userId}, {pagingSize}, {skipAmount}").Split('|')[1];
+        }
+        public static int GetUserCount()
+        {
+            string serialisedData = ClientToServerComunication($"{(int)UserOperation.GetUserCount}|");
+
+            return int.Parse(serialisedData.Split('|')[1]);
         }
         public static int LogIn(string userName, string password, bool doRememberMe)
         {

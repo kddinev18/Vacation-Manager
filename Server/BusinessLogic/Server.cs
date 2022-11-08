@@ -123,30 +123,45 @@ namespace Server
 
         public static void SendCorrenspodingResponse(TcpClient client, int operationNumber, List<string> args)
         {
-            //VacationManagerDbContext dbContext = new VacationManagerDbContext();
             UserOperation operation = (UserOperation)operationNumber;
             string response = String.Empty;
             switch (operation)
             {
                 case UserOperation.Register:
                     int userId = Operations.Register(args[0], args[1], args[2], _dbContexts[client]);
+                    // Generate response
                     response = $"{_success}|{userId}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.LogIn:
+                    // Generate response
                     response = $"{_success}|{Operations.LogIn(args[0], args[1], _dbContexts[client])}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.LogInWithCookies:
+                    // Generate response
                     response = $"{_success}|{Operations.LogInWithCookies(args[0], args[1], _dbContexts[client])}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.RegisterMember:
                     Operations.RegisterMember(args[0], args[1], args[2], args[3], _dbContexts[client]);
+                    // Generate response
                     response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.GetUsers:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetUsers(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]), _dbContexts[client])}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.GetUserCount:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetUserCount(_dbContexts[client])}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;

@@ -69,6 +69,10 @@ namespace ServiceLayer
 
             return int.Parse(serialisedData.Split('|')[1]);
         }
+        public static void RegisterMember(string userName, string email, string password, string roleIdentificator)
+        {
+            ClientToServerComunication($"{(int)UserOperation.RegisterMember}|{userName}, {email}, {password}, {roleIdentificator}");
+        }
         public static int LogIn(string userName, string password, bool doRememberMe)
         {
             string serialisedData = ClientToServerComunication($"{(int)UserOperation.LogIn}|{userName}, {password}");

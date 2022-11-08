@@ -63,5 +63,24 @@ namespace Vacation_Manager.ViewModel
         {
             Services.RemoveCookies();
         }
+
+        public static void RegisterMember(string userName, string email, string password, string roleIdentificator)
+        {
+            //Checks the user input
+            if (!HandleUserInput.GeneralHandler(userName, email, password, roleIdentificator))
+                return;
+
+            try
+            {
+                // Register the user into the database
+                Services.RegisterMember(userName, email, password, roleIdentificator);
+            }
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
     }
 }

@@ -5,5 +5,6 @@
         Register = 0,
         LogIn = 2,
         LogInWithCookies = 3,
+        RegisterMember = 4
     }
 }

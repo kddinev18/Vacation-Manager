@@ -70,13 +70,13 @@ namespace BusinessLogicLayer.Logic
             // Search if there is a master role
             foreach (Role existingRoles in dbContext.Roles)
                 // If there is stop the function
-                if (existingRoles.RoleIdentificator == 1)
+                if (existingRoles.RoleIdentificator == "Master")
                     return;
 
             // If not create the roleless role
             Role role = new Role()
             {
-                RoleIdentificator = 1
+                RoleIdentificator = "Master"
             };
 
             // Add the role to the context
@@ -86,7 +86,7 @@ namespace BusinessLogicLayer.Logic
             dbContext.SaveChanges();
         }
 
-        // Creates a new user
+        // Creates a new master user
         public static int Register(string userName, string email, string password, VacationManagerContext dbContext)
         {
             // Add master role
@@ -110,7 +110,7 @@ namespace BusinessLogicLayer.Logic
                 Salt = salt,
             };
             // Assign roleless role
-            newUser.Role = dbContext.Roles.Where(role => role.RoleIdentificator == 1).FirstOrDefault();
+            newUser.Role = dbContext.Roles.Where(role => role.RoleIdentificator == "Master").FirstOrDefault();
 
             // Add the newly added user into the current context
             dbContext.Users.Add(newUser);
@@ -120,6 +120,38 @@ namespace BusinessLogicLayer.Logic
 
             // Returns the newly added user
             return newUser.UserId;
+        }
+
+        // Creates a new master user
+        public static void RegisterMember(string userName, string email, string password, string roleIdentificator, VacationManagerContext dbContext)
+        {
+            // Checks if the email is on corrent format
+            CheckEmail(email);
+            // Checks if the password is on corrent format
+            CheckPassword(password);
+            // Gets the salt
+            string salt = GetSalt();
+            // Hashes the password combinded with the salt
+            string hashPassword = Hash(password + salt);
+
+            // Add the requested role
+            Role role = RoleLogic.AddRole(roleIdentificator, dbContext);
+
+            // Add new instance of a User
+            User newUser = new User()
+            {
+                UserName = userName,
+                Password = hashPassword,
+                Email = email,
+                Salt = salt,
+                RoleId = role.RoleId
+            };
+
+            // Add the newly added user into the current context
+            dbContext.Users.Add(newUser);
+
+            // Save all changes made in this context into the database
+            dbContext.SaveChanges();
         }
 
         // Checks if the email is on corrent format
@@ -232,7 +264,7 @@ namespace BusinessLogicLayer.Logic
         // Checks weather a user has the permissions to perform a specific action
         public static bool CheckAuthorisation(int userId, VacationManagerContext dbContext)
         {
-            return dbContext.Users.Where(user => user.UserId == userId).First().Role.RoleIdentificator == 1;
+            return dbContext.Users.Where(user => user.UserId == userId).First().Role.RoleIdentificator == "Master";
         }
     }
 }

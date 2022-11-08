@@ -40,7 +40,7 @@
         <TextBlock Text="Teams" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 0 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
 
         <!--Add Button-->
-        <Button Style="{StaticResource addButton}" Click="AddTeamsButton_Click" Margin="0 0 0 0" >
+        <Button Style="{StaticResource addButton}" Click="AddTeamsButton_Click" x:Name="AddTeamsButton" Margin="0 0 0 0" >
             <StackPanel Orientation="Horizontal">
                 <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
                 <TextBlock Text="Add new Teasm"/>
@@ -62,14 +62,6 @@
         <!--Members Datagrid-->
         <DataGrid Grid.Row="5" x:Name="projectDataGrid">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn CanUserReorder="False" Width="auto">
-                    <DataGridCheckBoxColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <CheckBox/>
-                        </DataTemplate>
-                    </DataGridCheckBoxColumn.HeaderTemplate>
-                </DataGridCheckBoxColumn>
-
                 <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="Auto"/>
 
                 <DataGridTextColumn Header="Team members" IsReadOnly="True" Width="*"/>

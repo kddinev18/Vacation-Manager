@@ -157,5 +157,15 @@ namespace ServiceLayer
             // Cerates a file and writes the user credential in it
             File.WriteAllText(_userCredentialsPath, JsonSerializer.Serialize(new UserCredentials() { Id = userCredentials.Id, UserName = userCredentials.UserName, HashedPassword = userCredentials.HashedPassword }));
         }
+
+
+
+
+
+
+        public static void AddTeam(string teamName, string userNames)
+        {
+            ClientToServerComunication($"{(int)UserOperation.AddTeam}|{teamName}, {userNames}");
+        }
     }
 }

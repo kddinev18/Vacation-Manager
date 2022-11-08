@@ -185,6 +185,13 @@ namespace Server
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
+                case UserOperation.AddTeam:
+                    Operations.AddTeam(args[0], args[1].Split(';'), _dbContexts[client]);
+                    // Generate response
+                    response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
                 default:
                     break;
             }

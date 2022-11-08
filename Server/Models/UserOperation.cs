@@ -11,5 +11,6 @@
         RemoveUser = 7,
         EditUser = 8,
         CheckAuthentication = 9,
+        AddTeam = 10,
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Vacation_Manager.View.Code_behind.AddTeam;
 
 namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
 {
@@ -27,7 +28,8 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
 
         private void AddTeamsButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            AddTeamWindow addTeamWindow = new AddTeamWindow();
+            addTeamWindow.Show();
         }
     }
 }

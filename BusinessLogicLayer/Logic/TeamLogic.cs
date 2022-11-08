@@ -10,7 +10,7 @@ namespace BusinessLogicLayer.Logic
 {
     public static class TeamLogic
     {
-        public static void AddTeam(string teamName, ICollection<User> users, VacationManagerContext dbContext)
+        public static void AddTeam(string teamName, string[] users, VacationManagerContext dbContext)
         {
             Team newTeam = new Team()
             {
@@ -18,9 +18,9 @@ namespace BusinessLogicLayer.Logic
             };
             dbContext.Teams.Add(newTeam);
             dbContext.SaveChanges();
-            foreach (User user in users)
+            foreach (string userName in users)
             {
-                UserTeamLogic.AddUserTeam(user, newTeam, dbContext);
+                UserTeamLogic.AddUserTeam(dbContext.Users.Where(user=>user.UserName == userName).First(), newTeam, dbContext);
             }
             dbContext.SaveChanges();
         }

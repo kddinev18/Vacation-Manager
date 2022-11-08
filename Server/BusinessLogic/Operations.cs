@@ -74,5 +74,9 @@ namespace Server
         {
             return UserLogic.CheckAuthorisation(userId, dbContext);
         }
+        public static void AddTeam(string teamName, string[] users, VacationManagerContext dbContext)
+        {
+            TeamLogic.AddTeam(teamName, users, dbContext);
+        }
     }
 }

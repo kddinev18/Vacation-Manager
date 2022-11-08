@@ -53,5 +53,18 @@ namespace Vacation_Manager.ViewModel
                 MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        public static void EditUser(int userId, string email, string role)
+        {
+            try
+            {
+                Services.EditUser(userId, email, role);
+            }
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

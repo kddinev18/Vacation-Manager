@@ -9,5 +9,6 @@
         GetUsers = 5,
         GetUserCount = 6,
         RemoveUser = 7,
+        EditUser = 8,
     }
 }

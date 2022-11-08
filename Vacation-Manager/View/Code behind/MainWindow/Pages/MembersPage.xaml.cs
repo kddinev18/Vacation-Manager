@@ -37,31 +37,20 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
             InitializeComponent();
 
             _userCount = UserLogic.GetUserCount()-1;
-            _numberOfPages = (int)Math.Ceiling((double)_userCount / 10);
+            _numberOfPages = (int)Math.Ceiling((double)_userCount / _pagingSize);
 
-            UpdateDataGrid();
+            UpdateDataGrid(0);
 
             PrevButton.IsEnabled = false;
-            if(_numberOfPages == 0)
+            if(_numberOfPages <= 1)
             {
                 NextButton.IsEnabled = false;
             }
         }
-        public void UpdateDataGrid()
-        {
-            _usersInformation = new ObservableCollection<UserInformation>(UserLogic.GetUsers(CurrentUserInformation.CurrentUserId.Value, _pagingSize, _sikpAmount));
-            Random r = new Random();
-            foreach (UserInformation userInformation in _usersInformation)
-            {
-                userInformation.BgColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255)));
-                userInformation.Initials = userInformation.UserName.Substring(0, 1);
-            }
-            MemberDataGrid.ItemsSource = _usersInformation;
-        }
         public void UpdateDataGrid(int i)
         {
             _userCount+=i;
-            _numberOfPages = (int)Math.Ceiling((double)_userCount / 10);
+            _numberOfPages = (int)Math.Ceiling((double)_userCount / _pagingSize);
 
             _usersInformation = new ObservableCollection<UserInformation>(UserLogic.GetUsers(CurrentUserInformation.CurrentUserId.Value, _pagingSize, _sikpAmount));
             Random r = new Random();
@@ -81,7 +70,7 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
                 PrevButton.IsEnabled = false;
 
             _sikpAmount -= _pagingSize;
-            UpdateDataGrid();
+            UpdateDataGrid(0);
         }
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
@@ -92,7 +81,7 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
                 NextButton.IsEnabled = false;
 
             _sikpAmount += _pagingSize;
-            UpdateDataGrid();
+            UpdateDataGrid(0);
         }
         private void AddMembersButton_Click(object sender, RoutedEventArgs e)
         {
@@ -105,8 +94,13 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
+            UserInformation dataRow = (UserInformation)MemberDataGrid.SelectedItem;
+            UserLogic.EditUser(dataRow.Id, dataRow.Email, dataRow.RoleIdentificator);
+
+            UpdateDataGrid(0);
 
         }
+
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             UserInformation dataRow = (UserInformation)MemberDataGrid.SelectedItem;

@@ -87,6 +87,10 @@ namespace ServiceLayer
         {
             ClientToServerComunication($"{(int)UserOperation.RemoveUser}|{userId}");
         }
+        public static void EditUser(int userId, string email, string role)
+        {
+            ClientToServerComunication($"{(int)UserOperation.EditUser}|{userId}, {email}, {role}");
+        }
         public static int LogIn(string userName, string password, bool doRememberMe)
         {
             string serialisedData = ClientToServerComunication($"{(int)UserOperation.LogIn}|{userName}, {password}");

@@ -66,5 +66,9 @@ namespace Server
         {
             UserLogic.RemoveUser(userId, dbContext);
         }
+        public static void EditUser(int userId, string email, string role, VacationManagerContext dbContext)
+        {
+            UserLogic.EditUser(userId, email, role, dbContext);
+        }
     }
 }

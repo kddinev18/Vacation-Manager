@@ -45,11 +45,12 @@ namespace BusinessLogicLayer.Logic
                 .Replace("-", "");
         }
         // Generates a random sequence of characters and numbers
-        private static string GetSalt()
+        private static string GetSalt(string userName)
         {
             StringBuilder salt = new StringBuilder();
             Random random = new Random();
-            for (int i = 0; i < 16; i++)
+            salt.Append(userName.Substring(0, 6));
+            for (int i = 0; i < 10; i++)
             {
                 // Add another character into the string builder
                 salt.Append
@@ -100,7 +101,7 @@ namespace BusinessLogicLayer.Logic
             // Checks if the password is on corrent format
             CheckPassword(password);
             // Gets the salt
-            string salt = GetSalt();
+            string salt = GetSalt(userName);
             // Hashes the password combinded with the salt
             string hashPassword = Hash(password + salt);
 
@@ -133,7 +134,7 @@ namespace BusinessLogicLayer.Logic
             // Checks if the password is on corrent format
             CheckPassword(password);
             // Gets the salt
-            string salt = GetSalt();
+            string salt = GetSalt(userName);
             // Hashes the password combinded with the salt
             string hashPassword = Hash(password + salt);
 
@@ -299,6 +300,25 @@ namespace BusinessLogicLayer.Logic
         public static void RemoveUser(int userId, VacationManagerContext dbContext)
         {
             dbContext.Users.Remove(dbContext.Users.Where(user=>user.UserId == userId).First());
+            dbContext.SaveChanges();
+        }
+
+        public static void EditUser(int userId, string newEmail, string newRoleIdenificator, VacationManagerContext dbContext)
+        {
+            User user = dbContext.Users.Where(user => user.UserId == userId).First();
+            user.Email = newEmail;
+            Role role = dbContext.Roles.Where(role=>role.RoleIdentificator == newRoleIdenificator).FirstOrDefault();
+            if(role == null)
+            {
+                role = new Role()
+                {
+                    RoleIdentificator = newRoleIdenificator,
+                };
+                dbContext.Roles.Add(role);
+                dbContext.SaveChanges();
+            }
+            user.Role = role;
+            dbContext.Update(user);
             dbContext.SaveChanges();
         }
     }

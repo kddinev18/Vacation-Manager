@@ -172,6 +172,13 @@ namespace Server
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
+                case UserOperation.EditUser:
+                    // Generate response
+                    Operations.EditUser(int.Parse(args[0]), args[1], args[2], _dbContexts[client]);
+                    response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
                 default:
                     break;
             }

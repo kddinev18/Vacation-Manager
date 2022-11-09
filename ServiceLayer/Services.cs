@@ -2,8 +2,11 @@
 using System.Collections;
 using System.IO;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
+using System.Xml.Linq;
+
 namespace ServiceLayer
 {
     public class Services
@@ -163,9 +166,34 @@ namespace ServiceLayer
 
 
 
+
         public static void AddTeam(string teamName, string userNames)
         {
             ClientToServerComunication($"{(int)UserOperation.AddTeam}|{teamName}, {userNames}");
+        }
+
+
+
+
+
+
+
+
+        public static void AddProject(string name, string description)
+        {
+            ClientToServerComunication($"{(int)UserOperation.AddProject}|{name}, {description}");
+        }
+        public static string GetProjects(int userId, int pagingSize, int skipAmount)
+        {
+            string serialisedData = ClientToServerComunication($"{(int)UserOperation.GetProjects}|{userId}, {pagingSize}, {skipAmount}");
+
+            return serialisedData.Split('|')[1];
+        }
+        public static int GetProjectCount(int userId)
+        {
+            string serialisedData = ClientToServerComunication($"{(int)UserOperation.GetProjectCount}|{userId}");
+
+            return int.Parse(serialisedData.Split('|')[1]);
         }
     }
 }

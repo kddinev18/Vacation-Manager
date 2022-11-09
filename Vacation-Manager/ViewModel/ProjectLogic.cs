@@ -2,22 +2,36 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml.Linq;
 using Vacation_Manager.Models;
 
 namespace Vacation_Manager.ViewModel
 {
-    public static class UserLogic
+    public static class ProjectLogic
     {
-        public static IEnumerable<UserInformation> GetUsers(int userId, int pagingSize, int skipAmount)
+        public static void AddProject(string name, string description)
         {
             try
             {
-                // Converts the text into UserInformation objects and returns it
-                return JsonSerializer.Deserialize<IEnumerable<UserInformation>>(Services.GetUsers(userId, pagingSize, skipAmount));
+                Services.AddProject(name, description);
+            }
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public static IEnumerable<ProjectInformation> GetProjects(int userId, int pagingSize, int skipAmount)
+        {
+            try
+            {
+                return JsonSerializer.Deserialize<IEnumerable<ProjectInformation>>(Services.GetProjects(userId, pagingSize, skipAmount));
             }
             catch (Exception exception)
             {
@@ -27,43 +41,17 @@ namespace Vacation_Manager.ViewModel
             }
         }
 
-        public static int GetUserCount()
+        public static int GetProjectCount(int userId)
         {
             try
             {
-                return Services.GetUserCount();
+                return Services.GetProjectCount(userId);
             }
             catch (Exception exception)
             {
                 // Show error message box
                 MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return 0;
-            }
-        }
-
-        public static void RemoveUser(int userId)
-        {
-            try
-            {
-                Services.RemoveUser(userId);
-            }
-            catch (Exception exception)
-            {
-                // Show error message box
-                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        public static void EditUser(int userId, string email, string role)
-        {
-            try
-            {
-                Services.EditUser(userId, email, role);
-            }
-            catch (Exception exception)
-            {
-                // Show error message box
-                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

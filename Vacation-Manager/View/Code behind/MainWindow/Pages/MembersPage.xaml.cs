@@ -103,7 +103,7 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             UserInformation dataRow = (UserInformation)MemberDataGrid.SelectedItem;
-            UserLogic.EditUser(dataRow.Id, dataRow.Email, dataRow.RoleIdentificator);
+            UserLogic.EditUser(dataRow.UserId, dataRow.Email, dataRow.RoleIdentificator);
 
             UpdateDataGrid(0);
 
@@ -112,7 +112,7 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             UserInformation dataRow = (UserInformation)MemberDataGrid.SelectedItem;
-            UserLogic.RemoveUser(dataRow.Id);
+            UserLogic.RemoveUser(dataRow.UserId);
 
             UpdateDataGrid(-1);
         }

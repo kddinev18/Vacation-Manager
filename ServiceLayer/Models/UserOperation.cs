@@ -12,5 +12,8 @@
         EditUser = 8,
         CheckAuthentication = 9,
         AddTeam = 10,
+        AddProject = 11,
+        GetProjects = 12,
+        GetProjectCount = 13,
     }
 }

@@ -19,7 +19,7 @@ namespace BusinessLogicLayer.Logic
 
     public class UserInformation
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string RoleIdentificator { get; set; }
@@ -272,7 +272,7 @@ namespace BusinessLogicLayer.Logic
             return dbContext.Roles.Where(role=>role.RoleId == roleId).First().RoleIdentificator == "Master";
         }
 
-        public static ICollection<UserInformation> GetUsers(int userId, int pagingSize, int skipAmount, VacationManagerContext dbContext)
+        public static IEnumerable<UserInformation> GetUsers(int userId, int pagingSize, int skipAmount, VacationManagerContext dbContext)
         {
             // Create a nested context that will be used to retireve role's identificator
             VacationManagerContext nestedDbContext = new VacationManagerContext();
@@ -283,7 +283,7 @@ namespace BusinessLogicLayer.Logic
             {
                 usersInformation.Add(new UserInformation()
                 {
-                    Id = user.UserId,
+                    UserId = user.UserId,
                     UserName = user.UserName,
                     Email = user.Email,
                     RoleIdentificator = nestedDbContext.Roles.Where(role => role.RoleId == user.RoleId).First().RoleIdentificator

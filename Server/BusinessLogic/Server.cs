@@ -192,6 +192,25 @@ namespace Server
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
+                case UserOperation.AddProject:
+                    Operations.AddProject(args[0], args[1], _dbContexts[client]);
+                    // Generate response
+                    response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.GetProjects:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetProjects(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]), _dbContexts[client])}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.GetProjectCount:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetProjectCount(int.Parse(args[0]), _dbContexts[client])}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
                 default:
                     break;
             }

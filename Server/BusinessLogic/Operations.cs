@@ -78,5 +78,17 @@ namespace Server
         {
             TeamLogic.AddTeam(teamName, users, dbContext);
         }
+        public static void AddProject(string name, string description, VacationManagerContext dbContext)
+        {
+            ProjectLogic.AddProject(name, description, dbContext);
+        }
+        public static string GetProjects(int userId, int pagingSize, int skipAmount, VacationManagerContext dbContext)
+        {
+            return JsonSerializer.Serialize(ProjectLogic.GetProjects(userId, pagingSize, skipAmount, dbContext));
+        }
+        public static int GetProjectCount(int userId, VacationManagerContext dbContext)
+        {
+            return ProjectLogic.GetProjectsCount(userId, dbContext);
+        }
     }
 }

@@ -7,18 +7,16 @@ using System.Windows.Media;
 
 namespace Vacation_Manager.Models
 {
-    public class UserInformation
+    public class ProjectInformation
     {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string RoleIdentificator { get; set; }
+        public int ProjectId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
 
         public Brush BgColor { get; set; }
         public string Initials { get; set; }
 
         public bool EditButton { get; set; } = false;
         public bool RemoveButton { get; set; } = false;
-
     }
 }

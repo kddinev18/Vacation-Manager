@@ -62,22 +62,21 @@
         <!--Members Datagrid-->
         <DataGrid Grid.Row="5" x:Name="MemberDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="Auto" Binding="{Binding Id}"/>
-                
-                <DataGridTemplateColumn Header="Member" IsReadOnly="False" Width="*">
+                <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="Auto" Binding="{Binding UserId}"/>
+
+                <DataGridTemplateColumn Header="Icon" IsReadOnly="True" Width="0.35*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
                                     <TextBlock Text="{Binding Initials}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                                 </Border>
-
-                                <TextBlock Text="{Binding UserName}" VerticalAlignment="Center"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
+                <DataGridTextColumn Header="UserName" IsReadOnly="True" Width="*" Binding="{Binding UserName}"/>
                 <DataGridTextColumn Header="Email" IsReadOnly="False" Width="*" Binding="{Binding Email}"/>
                 <DataGridTextColumn Header="Role" IsReadOnly="False" Width="*" Binding="{Binding RoleIdentificator}"/>
 

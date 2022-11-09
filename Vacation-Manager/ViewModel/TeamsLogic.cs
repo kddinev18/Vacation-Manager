@@ -10,7 +10,7 @@ namespace Vacation_Manager.ViewModel
 {
     public static class TeamsLogic
     {
-        public static void AddTeam(string teamName, string userNames)
+        public static void AddTeam(string teamName, string userNames, string projectName)
         {
             try
             {

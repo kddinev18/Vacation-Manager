@@ -31,7 +31,7 @@ namespace Vacation_Manager.View.Code_behind.AddTeam
             try
             {
                 // Register the user into the database
-                TeamsLogic.AddTeam(TeamName.TextBox.Text, Members.TextBox.Text);
+                TeamsLogic.AddTeam(TeamName.TextBox.Text, Members.TextBox.Text, Members.TextBox.Text);
                 /*_membersPage.UpdateDataGrid(1);
                 isOpened = false;*/
                 this.Close();

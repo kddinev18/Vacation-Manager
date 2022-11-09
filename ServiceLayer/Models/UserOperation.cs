@@ -15,5 +15,7 @@
         AddProject = 11,
         GetProjects = 12,
         GetProjectCount = 13,
+        EditProject = 14,
+        RemoveProject = 15,
     }
 }

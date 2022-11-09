@@ -43,5 +43,19 @@ namespace BusinessLogicLayer.Logic
                 return 0;
             }
         }
+
+        public static void EditProject(int projectId, string name, string description, VacationManagerContext dbContext)
+        {
+            Project project = dbContext.Projects.Where(project=>project.ProjectId == projectId).First();
+            project.Name = name;
+            project.Description = description;
+            dbContext.SaveChanges();
+        }
+
+        public static void RemoveProject(int projectId, VacationManagerContext dbContext)
+        {
+            dbContext.Projects.Remove(dbContext.Projects.Where(project => project.ProjectId == projectId).First());
+            dbContext.SaveChanges();
+        }
     }
 }

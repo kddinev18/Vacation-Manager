@@ -195,5 +195,13 @@ namespace ServiceLayer
 
             return int.Parse(serialisedData.Split('|')[1]);
         }
+        public static void EditProject(int projectId, string name, string description)
+        {
+            ClientToServerComunication($"{(int)UserOperation.EditProject}|{projectId}, {name}, {description}");
+        }
+        public static void RemoveProject(int projectId)
+        {
+            ClientToServerComunication($"{(int)UserOperation.RemoveProject}|{projectId}");
+        }
     }
 }

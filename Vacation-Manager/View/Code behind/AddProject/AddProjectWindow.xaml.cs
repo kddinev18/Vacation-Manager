@@ -21,6 +21,7 @@ namespace Vacation_Manager.View.Code_behind.AddProject
     public partial class AddProjectWindow : Window
     {
         private bool _isMaximized;
+        public static bool isOpened = false;
 
         public AddProjectWindow()
         {
@@ -46,8 +47,8 @@ namespace Vacation_Manager.View.Code_behind.AddProject
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            /*isOpened = false;
-            this.Close();*/
+            isOpened = false;
+            this.Close();
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

@@ -289,7 +289,7 @@ namespace BusinessLogicLayer.Logic
                     RoleIdentificator = nestedDbContext.Roles.Where(role => role.RoleId == user.RoleId).First().RoleIdentificator
                 });
             }
-
+            nestedDbContext.Dispose();
             return usersInformation;
         }
 
@@ -306,21 +306,22 @@ namespace BusinessLogicLayer.Logic
 
         public static void EditUser(int userId, string newEmail, string newRoleIdenificator, VacationManagerContext dbContext)
         {
+            VacationManagerContext nestedDbContext = new VacationManagerContext();
             User user = dbContext.Users.Where(user => user.UserId == userId).First();
             user.Email = newEmail;
-            Role role = dbContext.Roles.Where(role=>role.RoleIdentificator == newRoleIdenificator).FirstOrDefault();
+            Role role = nestedDbContext.Roles.Where(role=>role.RoleIdentificator == newRoleIdenificator).FirstOrDefault();
             if(role == null)
             {
                 role = new Role()
                 {
                     RoleIdentificator = newRoleIdenificator,
                 };
-                dbContext.Roles.Add(role);
-                dbContext.SaveChanges();
+                nestedDbContext.Roles.Add(role);
+                nestedDbContext.SaveChanges();
             }
             user.Role = role;
-            dbContext.Update(user);
-            dbContext.SaveChanges();
+            nestedDbContext.Dispose();
+            dbContext.SaveChangesAsync();
         }
     }
 }

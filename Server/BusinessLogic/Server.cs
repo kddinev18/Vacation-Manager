@@ -14,7 +14,7 @@ namespace Server
     {
         private static TcpListener _tcpListener;
         private static List<TcpClient> _clients = new List<TcpClient>();
-        private static Dictionary<TcpClient, VacationManagerContext> _dbContexts = new Dictionary<TcpClient, VacationManagerContext>();
+        //private static Dictionary<TcpClient, VacationManagerContext> _dbContexts = new Dictionary<TcpClient, VacationManagerContext>();
         // Buffer
         private static byte[] _data = new byte[16777216];
         private int _port;
@@ -51,7 +51,7 @@ namespace Server
                 // Connect the client
                 client = _tcpListener.EndAcceptTcpClient(asyncResult);
 
-                _dbContexts.Add(client, new VacationManagerContext());
+                //_dbContexts.Add(client, new VacationManagerContext());
             }
             catch (Exception ex)
             {
@@ -117,18 +117,19 @@ namespace Server
         {
             client.Client.Shutdown(SocketShutdown.Both);
             client.Client.Close();
-            _dbContexts.Remove(client);
+            //_dbContexts.Remove(client);
             _clients.Remove(client);
         }
 
         public static void SendCorrenspodingResponse(TcpClient client, int operationNumber, List<string> args)
         {
+            VacationManagerContext vacationManagerContext = new VacationManagerContext();
             UserOperation operation = (UserOperation)operationNumber;
             string response = String.Empty;
             switch (operation)
             {
                 case UserOperation.Register:
-                    int userId = Operations.Register(args[0], args[1], args[2], _dbContexts[client]);
+                    int userId = Operations.Register(args[0], args[1], args[2], vacationManagerContext);
                     // Generate response
                     response = $"{_success}|{userId}";
                     // send data to the client
@@ -136,18 +137,18 @@ namespace Server
                     break;
                 case UserOperation.LogIn:
                     // Generate response
-                    response = $"{_success}|{Operations.LogIn(args[0], args[1], _dbContexts[client])}";
+                    response = $"{_success}|{Operations.LogIn(args[0], args[1], vacationManagerContext)}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.LogInWithCookies:
                     // Generate response
-                    response = $"{_success}|{Operations.LogInWithCookies(args[0], args[1], _dbContexts[client])}";
+                    response = $"{_success}|{Operations.LogInWithCookies(args[0], args[1], vacationManagerContext)}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.RegisterMember:
-                    Operations.RegisterMember(args[0], args[1], args[2], args[3], _dbContexts[client]);
+                    Operations.RegisterMember(args[0], args[1], args[2], args[3], vacationManagerContext);
                     // Generate response
                     response = $"{_success}";
                     // send data to the client
@@ -155,25 +156,25 @@ namespace Server
                     break;
                 case UserOperation.GetUsers:
                     // Generate response
-                    response = $"{_success}|{Operations.GetUsers(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]), _dbContexts[client])}";
+                    response = $"{_success}|{Operations.GetUsers(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]), vacationManagerContext)}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.GetUserCount:
                     // Generate response
-                    response = $"{_success}|{Operations.GetUserCount(_dbContexts[client])}";
+                    response = $"{_success}|{Operations.GetUserCount(vacationManagerContext)}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.RemoveUser:
-                    Operations.RemoveUser(int.Parse(args[0]),_dbContexts[client]);
+                    Operations.RemoveUser(int.Parse(args[0]), vacationManagerContext);
                     // Generate response
                     response = $"{_success}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.EditUser:
-                    Operations.EditUser(int.Parse(args[0]), args[1], args[2], _dbContexts[client]);
+                    Operations.EditUser(int.Parse(args[0]), args[1], args[2], vacationManagerContext);
                     // Generate response
                     response = $"{_success}";
                     // send data to the client
@@ -181,19 +182,19 @@ namespace Server
                     break;
                 case UserOperation.CheckAuthentication:
                     // Generate response
-                    response = $"{_success}|{Operations.CheckAuthentication(int.Parse(args[0]), _dbContexts[client])}";
+                    response = $"{_success}|{Operations.CheckAuthentication(int.Parse(args[0]), vacationManagerContext)}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.AddTeam:
-                    Operations.AddTeam(args[0], args[1].Split(';'), _dbContexts[client]);
+                    Operations.AddTeam(args[0], args[1].Split(';'), vacationManagerContext);
                     // Generate response
                     response = $"{_success}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.AddProject:
-                    Operations.AddProject(args[0], args[1], _dbContexts[client]);
+                    Operations.AddProject(args[0], args[1], vacationManagerContext);
                     // Generate response
                     response = $"{_success}";
                     // send data to the client
@@ -201,13 +202,27 @@ namespace Server
                     break;
                 case UserOperation.GetProjects:
                     // Generate response
-                    response = $"{_success}|{Operations.GetProjects(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]), _dbContexts[client])}";
+                    response = $"{_success}|{Operations.GetProjects(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]), vacationManagerContext)}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.GetProjectCount:
                     // Generate response
-                    response = $"{_success}|{Operations.GetProjectCount(int.Parse(args[0]), _dbContexts[client])}";
+                    response = $"{_success}|{Operations.GetProjectCount(int.Parse(args[0]), vacationManagerContext)}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.EditProject:
+                    Operations.EditProject(int.Parse(args[0]), args[1], args[2], vacationManagerContext);
+                    // Generate response
+                    response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.RemoveProject:
+                    Operations.RemoveProject(int.Parse(args[0]), vacationManagerContext);
+                    // Generate response
+                    response = $"{_success}";
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;

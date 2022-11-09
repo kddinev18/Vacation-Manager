@@ -1,6 +1,7 @@
 ﻿using ServiceLayer;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -52,6 +53,32 @@ namespace Vacation_Manager.ViewModel
                 // Show error message box
                 MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return 0;
+            }
+        }
+
+        public static void EditProject(int projectId, string name, string description)
+        {
+            try
+            {
+                Services.EditProject(projectId, name, description);
+            }
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public static void RemoveProject(int projectId)
+        {
+            try
+            {
+                Services.RemoveProject(projectId);
+            }
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

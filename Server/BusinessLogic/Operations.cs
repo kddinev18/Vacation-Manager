@@ -90,5 +90,13 @@ namespace Server
         {
             return ProjectLogic.GetProjectsCount(userId, dbContext);
         }
+        public static void EditProject(int projectId, string name, string description, VacationManagerContext dbContext)
+        {
+            ProjectLogic.EditProject(projectId, name, description, dbContext);
+        }
+        public static void RemoveProject(int projectId, VacationManagerContext dbContext)
+        {
+            ProjectLogic.RemoveProject(projectId, dbContext);
+        }
     }
 }

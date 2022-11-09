@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Vacation_Manager.View.Code_behind.MainWindow.Pages;
 using Vacation_Manager.ViewModel;
 
 namespace Vacation_Manager.View.Code_behind.AddProject
@@ -22,10 +23,11 @@ namespace Vacation_Manager.View.Code_behind.AddProject
     {
         private bool _isMaximized;
         public static bool isOpened = false;
-
-        public AddProjectWindow()
+        private ProjectsPage _projectsPage;
+        public AddProjectWindow(ProjectsPage projectsPage)
         {
             InitializeComponent();
+            _projectsPage = projectsPage;
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -33,8 +35,8 @@ namespace Vacation_Manager.View.Code_behind.AddProject
             {
                 // Register the user into the database
                 ProjectLogic.AddProject(ProjectName.TextBox.Text, Description.TextBox.Text);
-                /*_membersPage.UpdateDataGrid(1);
-                isOpened = false;*/
+                _projectsPage.UpdateDataGrid(1);
+                isOpened = false;
                 this.Close();
             }
             catch (Exception exception)

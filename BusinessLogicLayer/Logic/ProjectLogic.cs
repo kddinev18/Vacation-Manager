@@ -28,7 +28,8 @@ namespace BusinessLogicLayer.Logic
             }
             else
             {
-                return null;
+                IEnumerable<int> teamsId = dbContext.UsersTeams.Where(userTeam => userTeam.UserId == userId).Select(userTeam => userTeam.TeamId);
+                return dbContext.Teams.Where(team => teamsId.Contains(team.TeamId)).Select(team=>team.Project).Skip(skipAmount).Take(pagingSize);
             }
         }
 

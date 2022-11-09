@@ -54,8 +54,11 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         }
         private void AddProjectsButton_Click(object sender, RoutedEventArgs e)
         {
-            AddProjectWindow addProjectWindow = new AddProjectWindow();
-            addProjectWindow.Show();
+            if(!AddProjectWindow.isOpened)
+            {
+                AddProjectWindow addProjectWindow = new AddProjectWindow(this);
+                addProjectWindow.Show();
+            }
         }
         public void UpdateDataGrid(int i)
         {

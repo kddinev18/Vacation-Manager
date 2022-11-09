@@ -15,8 +15,8 @@ namespace BusinessLogicLayer.Logic
             dbContext.UsersTeams.Add(
                 new UsersTeam() 
                 { 
-                    Team = team, 
-                    User = user
+                    TeamId = team.TeamId, 
+                    UserId = user.UserId
                 }
             );
         }

@@ -187,7 +187,7 @@ namespace Server
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 case UserOperation.AddTeam:
-                    Operations.AddTeam(args[0], args[1].Split(';'), vacationManagerContext);
+                    Operations.AddTeam(args[0], args[1].Split(';'), args[2], vacationManagerContext);
                     // Generate response
                     response = $"{_success}";
                     // send data to the client

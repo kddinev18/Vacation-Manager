@@ -14,7 +14,7 @@ namespace Vacation_Manager.ViewModel
         {
             try
             {
-                Services.AddTeam(teamName, userNames);
+                Services.AddTeam(teamName, userNames, projectName);
 
             }
             catch (Exception exception)

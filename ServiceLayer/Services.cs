@@ -167,9 +167,9 @@ namespace ServiceLayer
 
 
 
-        public static void AddTeam(string teamName, string userNames)
+        public static void AddTeam(string teamName, string userNames, string projectName)
         {
-            ClientToServerComunication($"{(int)UserOperation.AddTeam}|{teamName}, {userNames}");
+            ClientToServerComunication($"{(int)UserOperation.AddTeam}|{teamName}, {userNames}, {projectName}");
         }
 
 

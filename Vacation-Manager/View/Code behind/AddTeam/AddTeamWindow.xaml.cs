@@ -21,7 +21,7 @@ namespace Vacation_Manager.View.Code_behind.AddTeam
     public partial class AddTeamWindow : Window
     {
         private bool _isMaximized;
-
+        public static bool isOpened = false;
         public AddTeamWindow()
         {
             InitializeComponent();
@@ -31,9 +31,9 @@ namespace Vacation_Manager.View.Code_behind.AddTeam
             try
             {
                 // Register the user into the database
-                TeamsLogic.AddTeam(TeamName.TextBox.Text, Members.TextBox.Text, Members.TextBox.Text);
-                /*_membersPage.UpdateDataGrid(1);
-                isOpened = false;*/
+                TeamsLogic.AddTeam(TeamName.TextBox.Text, Members.TextBox.Text, ProjectName.TextBox.Text);
+                //_membersPage.UpdateDataGrid(1);
+                isOpened = false;
                 this.Close();
             }
             catch (Exception exception)
@@ -46,8 +46,8 @@ namespace Vacation_Manager.View.Code_behind.AddTeam
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            /*isOpened = false;
-            this.Close();*/
+            isOpened = false;
+            this.Close();
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

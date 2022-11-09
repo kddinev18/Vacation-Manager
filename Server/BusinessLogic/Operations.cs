@@ -98,5 +98,15 @@ namespace Server
         {
             ProjectLogic.RemoveProject(projectId, dbContext);
         }
+
+        public static string GetTeams(int userId, int pagingSize, int skipAmount, VacationManagerContext dbContext)
+        {
+            return JsonSerializer.Serialize(TeamLogic.GetTeams(userId, pagingSize, skipAmount, dbContext));
+        }
+
+        public static int GetTeamsCount(int userId, VacationManagerContext dbContext)
+        {
+            return TeamLogic.GetTeamsCount(userId, dbContext);
+        }    
     }
 }

@@ -171,6 +171,16 @@ namespace ServiceLayer
         {
             ClientToServerComunication($"{(int)UserOperation.AddTeam}|{teamName}, {userNames}, {projectName}");
         }
+        public static string GetTeams(int userId, int pagigngSize, int skipAmount)
+        {
+            string serialisedData = ClientToServerComunication($"{(int)UserOperation.GetTeams}|{userId}, {pagigngSize}, {skipAmount}");
+            return serialisedData.Split('|')[1];
+        }
+        public static int GetTeamsCount(int userId)
+        {
+            string serialisedData = ClientToServerComunication($"{(int)UserOperation.GetTeamCount}|{userId}");
+            return int.Parse(serialisedData.Split('|')[1]);
+        }
 
 
 

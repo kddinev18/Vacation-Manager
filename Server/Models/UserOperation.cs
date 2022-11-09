@@ -17,5 +17,7 @@
         GetProjectCount = 13,
         EditProject = 14,
         RemoveProject = 15,
+        GetTeams = 16,
+        GetTeamCount = 17,
     }
 }

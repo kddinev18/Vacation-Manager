@@ -226,6 +226,18 @@ namespace Server
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
+                case UserOperation.GetTeams:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetTeams(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]), vacationManagerContext)}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.GetTeamCount:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetTeamsCount(int.Parse(args[0]), vacationManagerContext)}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
                 default:
                     break;
             }

@@ -13,6 +13,7 @@ namespace DataAccessLayer.Data.Model
         public DateTime To { get; set; }
         public DateTime Published { get; set; }
         public bool Approoved { get; set; }
+        public byte[] Image { get; set; }
 
         public virtual User User { get; set; }
     }

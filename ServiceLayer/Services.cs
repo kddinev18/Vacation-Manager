@@ -181,6 +181,14 @@ namespace ServiceLayer
             string serialisedData = ClientToServerComunication($"{(int)UserOperation.GetTeamCount}|{userId}");
             return int.Parse(serialisedData.Split('|')[1]);
         }
+        public static void EditTeam(int teamId, string teamName, string users)
+        {
+            ClientToServerComunication($"{(int)UserOperation.EditTeam}|{teamId}, {teamName}, {users}");
+        }
+        public static void RemoveTeam(int teamId)
+        {
+            ClientToServerComunication($"{(int)UserOperation.RemoveTeam}|{teamId}");
+        }
 
 
 
@@ -212,6 +220,32 @@ namespace ServiceLayer
         public static void RemoveProject(int projectId)
         {
             ClientToServerComunication($"{(int)UserOperation.RemoveProject}|{projectId}");
+        }
+
+
+
+        public static void AddVacation(int userId, DateTime from, DateTime to, string image)
+        {
+            ClientToServerComunication($"{(int)UserOperation.AddVacation}|{userId}, {from}, {to}, {image}");
+        }
+
+        public static string GetVacations(int userId, int pagingSize, int skipAmount)
+        {
+            string serializedData = ClientToServerComunication($"{(int)UserOperation.GetVacations}|{userId}, {pagingSize}, {skipAmount}");
+
+            return serializedData.Split('|')[1];
+        }
+
+        public static int GetVacationsCount(int userId)
+        {
+            string serializedData = ClientToServerComunication($"{(int)UserOperation.GetVacationsCount}|{userId}");
+
+            return int.Parse(serializedData.Split('|')[1]);
+        }
+
+        public static void ApprooveVacation(int vacationId)
+        {
+            ClientToServerComunication($"{(int)UserOperation.ApprooveVacation}|{vacationId}");
         }
     }
 }

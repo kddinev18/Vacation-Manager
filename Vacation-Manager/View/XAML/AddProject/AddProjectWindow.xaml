@@ -14,7 +14,7 @@
         <StackPanel x:Name="RegisterPanel" Width="350">
             <StackPanel Margin="20 40">
                 <TextBlock Text="Register a" Margin="0 0 0 0" Foreground="#2b2b2b" TextAlignment="Center" FontSize="40" FontFamily="Archive"/>
-                <TextBlock Text="Team" Margin="0 -15 0 5" Foreground="#2b2b2b" TextAlignment="Center" FontSize="40" FontFamily="Archive"/>
+                <TextBlock Text="Project" Margin="0 -15 0 5" Foreground="#2b2b2b" TextAlignment="Center" FontSize="40" FontFamily="Archive"/>
                 <userControls:TextBoxControl x:Name="ProjectName" TextBoxIcon="Tag" TextBoxHintText="ProjectName"/>
                 <userControls:TextBoxControl x:Name="Description" TextBoxIcon="Text" TextBoxHintText="Description"/>
 

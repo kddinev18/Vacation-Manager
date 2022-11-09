@@ -19,5 +19,12 @@
         RemoveProject = 15,
         GetTeams = 16,
         GetTeamCount = 17,
+        EditTeam = 18,
+        RemoveTeam = 19,
+
+        AddVacation = 20,
+        GetVacations = 21,
+        GetVacationsCount = 22,
+        ApprooveVacation = 23,
     }
 }

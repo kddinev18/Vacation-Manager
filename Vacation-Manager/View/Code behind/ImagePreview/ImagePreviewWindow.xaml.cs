@@ -12,42 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Vacation_Manager.View.Code_behind.MainWindow.Pages;
-using Vacation_Manager.ViewModel;
 
-namespace Vacation_Manager.View.Code_behind.AddTeam
+namespace Vacation_Manager.View.Code_behind.ImagePreview
 {
     /// <summary>
-    /// Interaction logic for AddTeamWindow.xaml
+    /// Interaction logic for ImagePreviewWindow.xaml
     /// </summary>
-    public partial class AddTeamWindow : Window
+    public partial class ImagePreviewWindow : Window
     {
         private bool _isMaximized;
         public static bool isOpened = false;
-        private TeamsPage _teamsPage;
-        public AddTeamWindow(TeamsPage teamsPage)
+        public ImagePreviewWindow(BitmapImage image)
         {
             InitializeComponent();
-            _teamsPage = teamsPage;
-        }
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // Register the user into the database
-                TeamLogic.AddTeam(TeamName.TextBox.Text, Members.TextBox.Text, ProjectName.TextBox.Text);
-                _teamsPage.UpdateDataGrid(1);
-                isOpened = false;
-                this.Close();
-            }
-            catch (Exception exception)
-            {
-                // Show error message box
-                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            isOpened = true;
+            Image.Source = image;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             isOpened = false;
             this.Close();

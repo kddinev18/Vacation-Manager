@@ -27,7 +27,7 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         public bool EditButton { get; set; } = false;
         public bool RemoveButton { get; set; } = false;
         private ObservableCollection<TeamInformation> _teamInformation;
-        private int _userCount;
+        private int _teamsCount;
         private int _pagingSize = 10;
         private int _numberOfPages;
         private int _pageIndex = 0;
@@ -40,8 +40,8 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
                 AddTeamsButton.IsEnabled = false;
             }
 
-            _userCount = TeamsLogic.GetTeamsCount(CurrentUserInformation.CurrentUserId.Value);
-            _numberOfPages = (int)Math.Ceiling((double)_userCount / _pagingSize);
+            _teamsCount = TeamLogic.GetTeamsCount(CurrentUserInformation.CurrentUserId.Value);
+            _numberOfPages = (int)Math.Ceiling((double)_teamsCount / _pagingSize);
 
             UpdateDataGrid(0);
 
@@ -53,10 +53,10 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         }
         public void UpdateDataGrid(int i)
         {
-            _userCount += i;
-            _numberOfPages = (int)Math.Ceiling((double)_userCount / _pagingSize);
+            _teamsCount += i;
+            _numberOfPages = (int)Math.Ceiling((double)_teamsCount / _pagingSize);
 
-            _teamInformation = new ObservableCollection<TeamInformation>(TeamsLogic.GetTeams(CurrentUserInformation.CurrentUserId.Value, _pagingSize, _sikpAmount));
+            _teamInformation = new ObservableCollection<TeamInformation>(TeamLogic.GetTeams(CurrentUserInformation.CurrentUserId.Value, _pagingSize, _sikpAmount));
             Random r = new Random();
             foreach (TeamInformation teamInformation in _teamInformation)
             {
@@ -97,26 +97,26 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         {
             if (AddTeamWindow.isOpened == false)
             {
-                AddTeamWindow addMemberWindow = new AddTeamWindow(this);
-                addMemberWindow.Show();
+                AddTeamWindow addTeamWindow = new AddTeamWindow(this);
+                addTeamWindow.Show();
             }
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            /*UserInformation dataRow = (UserInformation)TeamsDataGrid.SelectedItem;
-            UserLogic.EditUser(dataRow.UserId, dataRow.Email, dataRow.RoleIdentificator);
+            TeamInformation dataRow = (TeamInformation)TeamsDataGrid.SelectedItem;
+            TeamLogic.EditTeam(dataRow.TeamId, dataRow.Name, dataRow.Members);
 
-            UpdateDataGrid(0);*/
+            UpdateDataGrid(0);
 
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            /*UserInformation dataRow = (UserInformation)TeamsDataGrid.SelectedItem;
-            UserLogic.RemoveUser(dataRow.UserId);
+            TeamInformation dataRow = (TeamInformation)TeamsDataGrid.SelectedItem;
+            TeamLogic.RemoveTeam(dataRow.TeamId);
 
-            UpdateDataGrid(-1);*/
+            UpdateDataGrid(-1);
         }
     }
 }

@@ -238,6 +238,46 @@ namespace Server
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
+                case UserOperation.EditTeam:
+                    Operations.EditTeam(int.Parse(args[0]), args[1], args[2].Split(';'), vacationManagerContext);;
+                    // Generate response
+                    response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.RemoveTeam:
+                    Operations.RemoveTeam(int.Parse(args[0]), vacationManagerContext);
+                    // Generate response
+                    response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.AddVacation:
+                    Operations.AddVacation(int.Parse(args[0]), DateTime.Parse(args[1]), DateTime.Parse(args[2]), args[3], vacationManagerContext);
+                    // Generate response
+                    response = $"{_success}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.GetVacations:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetVacations(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]), vacationManagerContext)}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.GetVacationsCount:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetVacationsCount(int.Parse(args[0]), vacationManagerContext)}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.ApprooveVacation:
+                    Operations.ApprooveVacation(int.Parse(args[0]), vacationManagerContext);
+                    // Generate response
+                    response = $"{_success}|";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
                 default:
                     break;
             }

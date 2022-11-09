@@ -107,6 +107,37 @@ namespace Server
         public static int GetTeamsCount(int userId, VacationManagerContext dbContext)
         {
             return TeamLogic.GetTeamsCount(userId, dbContext);
-        }    
+        }
+        public static void EditTeam(int teamid, string teamName, string[] users, VacationManagerContext dbContext)
+        {
+            TeamLogic.EditTeam(teamid, teamName, users, dbContext);
+        }
+        public static void RemoveTeam(int teamid, VacationManagerContext dbContext)
+        {
+            TeamLogic.RemoveTeam(teamid, dbContext);
+        }
+
+        public static void AddVacation(int userId, DateTime from, DateTime to, string image, VacationManagerContext dbContext)
+        {
+            string[] stringBytes = image.Split(';');
+            byte[] imageBytes = new byte[stringBytes.Length];
+            for (int i = 0; i < imageBytes.Length; i++)
+            {
+                imageBytes[i] = byte.Parse(stringBytes[i]);
+            }
+            VacationLogic.AddVacation(userId, from, to, imageBytes, dbContext);
+        }
+        public static string GetVacations(int userId, int pagingSize, int skipAmount, VacationManagerContext dbContext)
+        {
+            return JsonSerializer.Serialize(VacationLogic.GetVacations(userId, pagingSize, skipAmount, dbContext));
+        }
+        public static int GetVacationsCount(int userId, VacationManagerContext dbContext)
+        {
+            return VacationLogic.GetVacationsCount(userId, dbContext);
+        }
+        public static void ApprooveVacation(int cationId, VacationManagerContext dbContext)
+        {
+            VacationLogic.ApprooveVacation(cationId, dbContext);
+        }
     }
 }

@@ -20,5 +20,9 @@ namespace BusinessLogicLayer.Logic
                 }
             );
         }
+        public static void RemoveTeam(int teamId, VacationManagerContext dbContext)
+        {
+            dbContext.UsersTeams.RemoveRange(dbContext.UsersTeams.Where(userTeam => userTeam.TeamId == teamId));
+        }
     }
 }

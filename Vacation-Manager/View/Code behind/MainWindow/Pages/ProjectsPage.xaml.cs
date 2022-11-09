@@ -28,7 +28,7 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         public bool EditButton { get; set; } = false;
         public bool RemoveButton { get; set; } = false;
         private ObservableCollection<ProjectInformation> _projectsInformation;
-        private int _userCount;
+        private int _projectCount;
         private int _pagingSize = 10;
         private int _numberOfPages;
         private int _pageIndex = 0;
@@ -41,8 +41,8 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
                 AddProjectsButton.IsEnabled = false;
             }
 
-            _userCount = ProjectLogic.GetProjectCount(CurrentUserInformation.CurrentUserId.Value);
-            _numberOfPages = (int)Math.Ceiling((double)_userCount / _pagingSize);
+            _projectCount = ProjectLogic.GetProjectCount(CurrentUserInformation.CurrentUserId.Value);
+            _numberOfPages = (int)Math.Ceiling((double)_projectCount / _pagingSize);
 
             UpdateDataGrid(0);
 
@@ -62,8 +62,8 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
         }
         public void UpdateDataGrid(int i)
         {
-            _userCount += i;
-            _numberOfPages = (int)Math.Ceiling((double)_userCount / _pagingSize);
+            _projectCount += i;
+            _numberOfPages = (int)Math.Ceiling((double)_projectCount / _pagingSize);
             _projectsInformation = new ObservableCollection<ProjectInformation>(ProjectLogic.GetProjects(CurrentUserInformation.CurrentUserId.Value, _pagingSize, _sikpAmount));
             Random r = new Random();
             foreach (ProjectInformation projectInformation in _projectsInformation)

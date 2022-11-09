@@ -62,7 +62,7 @@
         <!--Members Datagrid-->
         <DataGrid Grid.Row="5" x:Name="TeamsDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="Auto"/>
+                <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="Auto" Binding="{Binding TeamId}"/>
 
                 <DataGridTemplateColumn Header="Team Icon" IsReadOnly="True" Width="0.5*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -118,7 +118,7 @@
                 <Button Style="{StaticResource pagingButton}" x:Name="PrevButton" Click="PrevButton_Click">
                     <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource pagingButtonIcon}"/>
                 </Button>
-                <Button Style="{StaticResource pagingButton}" x:Name="NextButton" Click="NextButton_Click">
+                <Button Style="{StaticResource pagingButton}" Margin="5 0 0 0" x:Name="NextButton" Click="NextButton_Click">
                     <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource pagingButtonIcon}"/>
                 </Button>
                 <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>

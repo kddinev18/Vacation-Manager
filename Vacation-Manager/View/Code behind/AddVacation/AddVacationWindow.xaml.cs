@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,31 +12,35 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Vacation_Manager.Models;
 using Vacation_Manager.View.Code_behind.MainWindow.Pages;
 using Vacation_Manager.ViewModel;
 
-namespace Vacation_Manager.View.Code_behind.AddTeam
+namespace Vacation_Manager.View.Code_behind.AddVacation
 {
     /// <summary>
-    /// Interaction logic for AddTeamWindow.xaml
+    /// Interaction logic for AddVacationWindow.xaml
     /// </summary>
-    public partial class AddTeamWindow : Window
+    public partial class AddVacationWindow : Window
     {
         private bool _isMaximized;
+        private VacationsPage _vacationsPage;
+        private DateTime _from;
+        private DateTime _to;
+        private string _selectedImagePath;
         public static bool isOpened = false;
-        private TeamsPage _teamsPage;
-        public AddTeamWindow(TeamsPage teamsPage)
+        public AddVacationWindow(VacationsPage vacationsPage)
         {
             InitializeComponent();
-            _teamsPage = teamsPage;
+            _vacationsPage = vacationsPage;
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 // Register the user into the database
-                TeamLogic.AddTeam(TeamName.TextBox.Text, Members.TextBox.Text, ProjectName.TextBox.Text);
-                _teamsPage.UpdateDataGrid(1);
+                VacationLogic.AddVacation(CurrentUserInformation.CurrentUserId.Value, _from, _to, _selectedImagePath);
+                _vacationsPage.UpdateDataGrid(1);
                 isOpened = false;
                 this.Close();
             }
@@ -51,6 +56,38 @@ namespace Vacation_Manager.View.Code_behind.AddTeam
         {
             isOpened = false;
             this.Close();
+        }
+        private void PickAFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Set preview for the selected image
+            // Create OpenFileDialog 
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "PNG Files (*.png)|*.png";
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            bool? result = dlg.ShowDialog();
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                _selectedImagePath = dlg.FileName;
+                FileHint.Text = _selectedImagePath.Split(@"\").Last();
+            }
+        }
+
+        private void DatePickerFrom_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DatePicker picker = sender as DatePicker;
+            _from = picker.SelectedDate.Value;
+        }
+        private void DatePickerTo_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DatePicker picker = sender as DatePicker;
+            _to = picker.SelectedDate.Value;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

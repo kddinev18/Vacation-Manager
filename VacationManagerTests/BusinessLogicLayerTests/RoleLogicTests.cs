@@ -10,7 +10,7 @@ using BusinessLogicLayer.Logic;
 
 namespace VacationManagerTests.BusinessLogicLayerTests
 {
-    public class RoleTests
+    public class RoleLogicTests
     {
         private VacationManagerContext _vacationManagerContext;
         [TearDown]

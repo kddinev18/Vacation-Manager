@@ -69,13 +69,13 @@ namespace BusinessLogicLayer.Logic
         }
 
         // Checks if there is a master role> if there isn't, it adds it
-        private static void CheckMasterRole(VacationManagerContext dbContext)
+        public static void CheckMasterRole(VacationManagerContext dbContext)
         {
             // Search if there is a master role
             foreach (Role existingRoles in dbContext.Roles)
                 // If there is stop the function
                 if (existingRoles.RoleIdentificator == "Master")
-                    throw new AccessViolationException("Thete is already registered admin in this system. Please contact your administrator");
+                    throw new AccessViolationException("There is already registered admin in this system. Please contact your administrator");
 
             // If not create the roleless role
             Role role = new Role()

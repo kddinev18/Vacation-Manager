@@ -24,20 +24,20 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
     public partial class VacationManagerMainWindow : Window
     {
         private bool _isMaximized = false;
-        public MembersPage MembersPage { get; set; }
-        public DashboardPage DashboardPage { get; set; }
-        public ProjectsPage ProjectsPage { get; set; }
-        public TeamsPage TeamsPage { get; set; }
-        public VacationsPage VacationsPage { get; set; }
+        public Lazy<MembersPage> MembersPage { get; set; }
+        public Lazy<DashboardPage> DashboardPage { get; set; }
+        public Lazy<ProjectsPage> ProjectsPage { get; set; }
+        public Lazy<TeamsPage> TeamsPage { get; set; }
+        public Lazy<VacationsPage> VacationsPage { get; set; }
         public VacationManagerMainWindow()
         {
             InitializeComponent();
-            MembersPage = new MembersPage();
-            DashboardPage = new DashboardPage();
-            ProjectsPage = new ProjectsPage();
-            TeamsPage = new TeamsPage();
-            VacationsPage = new VacationsPage();
-            ShowPage(MembersPage);
+            MembersPage = new Lazy<MembersPage>();
+            DashboardPage = new Lazy<DashboardPage>();
+            ProjectsPage = new Lazy<ProjectsPage>();
+            TeamsPage = new Lazy<TeamsPage>();
+            VacationsPage = new Lazy<VacationsPage>();
+            ShowPage(MembersPage.Value);
         }
 
         public void ShowPage(Page page)
@@ -76,27 +76,27 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
 
         private void DashboardButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowPage(DashboardPage);
+            ShowPage(DashboardPage.Value);
         }
 
         private void MembersButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowPage(MembersPage);
+            ShowPage(MembersPage.Value);
         }
 
         private void ProjectsButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowPage(ProjectsPage);
+            ShowPage(ProjectsPage.Value);
         }
 
         private void TeamsButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowPage(TeamsPage);
+            ShowPage(TeamsPage.Value);
         }
 
         private void VacationsButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowPage(VacationsPage);
+            ShowPage(VacationsPage.Value);
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)

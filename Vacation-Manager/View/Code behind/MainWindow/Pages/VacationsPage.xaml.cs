@@ -26,14 +26,13 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
     /// </summary>
     public partial class VacationsPage : Page
     {
-        public bool EditButton { get; set; } = false;
-        public bool RemoveButton { get; set; } = false;
         private ObservableCollection<VacationInformation> _vacationsInformation;
         private int _vacationsCount;
         private int _pagingSize = 10;
         private int _numberOfPages;
         private int _pageIndex = 0;
         private int _sikpAmount = 0;
+        private bool _isPopUpOpened = false;
         public VacationsPage()
         {
             InitializeComponent();

@@ -56,7 +56,7 @@
 
         <!--Filter Textbox-->
         <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4" Margin="0 0 20 0">
-            <userControls:TextBoxControl x:Name="UserName" TextBoxHintText="UserName"/>
+            <userControls:TextBoxControl x:Name="Filter" TextBoxHintText="Filter"/>
         </Grid>
 
         <!--Members Datagrid-->

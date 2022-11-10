@@ -56,7 +56,7 @@
 
         <!--Filter Textbox-->
         <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4" Margin="0 0 20 0">
-            <userControls:TextBoxControl x:Name="UserName" TextBoxHintText="UserName"/>
+            <userControls:TextBoxControl x:Name="Filter" TextBoxHintText="Filter"/>
         </Grid>
 
         <!--Members Datagrid-->
@@ -100,7 +100,7 @@
                                 <Button Style="{StaticResource gridEditButton}" x:Name="EditButton" Click="EditButton_Click" IsEnabled="{Binding EditButton}">
                                     <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                 </Button>
-                                <Button Style="{StaticResource gridRemoveButton}" x:Name="RemoveButton" Click="RemoveButton_Click" IsEnabled="{Binding RemoveButton}">
+                                <Button Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0" x:Name="RemoveButton" Click="RemoveButton_Click" IsEnabled="{Binding RemoveButton}">
                                     <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                 </Button>
                             </StackPanel>
@@ -118,7 +118,7 @@
                 <Button Style="{StaticResource pagingButton}" x:Name="PrevButton" Click="PrevButton_Click">
                     <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource pagingButtonIcon}"/>
                 </Button>
-                <Button Style="{StaticResource pagingButton}" Margin="5 0 0 0" x:Name="NextButton" Click="NextButton_Click">
+                <Button Style="{StaticResource pagingButton}" x:Name="NextButton" Click="NextButton_Click">
                     <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource pagingButtonIcon}"/>
                 </Button>
                 <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>

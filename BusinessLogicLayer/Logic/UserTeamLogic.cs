@@ -10,6 +10,7 @@ namespace BusinessLogicLayer.Logic
 {
     public static class UserTeamLogic
     {
+        // Adds a UserTeam
         public static void AddUserTeam(User user, Team team, VacationManagerContext dbContext)
         {
             dbContext.UsersTeams.Add(
@@ -20,6 +21,8 @@ namespace BusinessLogicLayer.Logic
                 }
             );
         }
+
+        // Removes a UserTeam
         public static void RemoveTeam(int teamId, VacationManagerContext dbContext)
         {
             dbContext.UsersTeams.RemoveRange(dbContext.UsersTeams.Where(userTeam => userTeam.TeamId == teamId));

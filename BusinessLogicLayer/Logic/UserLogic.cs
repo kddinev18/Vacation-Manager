@@ -9,14 +9,14 @@ using System.Collections.ObjectModel;
 
 namespace BusinessLogicLayer.Logic
 {
-    // POCO class
+    // POCO class userd for transferring information about the credentials of the user
     public class UserCredentials
     {
         public int Id { get; set; }
         public string UserName { get; set; }
         public string HashedPassword { get; set; }
     }
-
+    // POCO class userd for transferring information about a user
     public class UserInformation
     {
         public int UserId { get; set; }
@@ -265,62 +265,118 @@ namespace BusinessLogicLayer.Logic
             throw new ArgumentException("Your password or username is incorrect");
         }
 
-        // Checks weather a user has the permissions to perform a specific action
+        // Checks weather a user is admin
         public static bool CheckAuthorisation(int userId, VacationManagerContext dbContext)
         {
-            int roleId = dbContext.Users.Where(user => user.UserId == userId).First().RoleId;
-            return dbContext.Roles.Where(role=>role.RoleId == roleId).First().RoleIdentificator == "Master";
+            // Get the role id of the user
+            int roleId = dbContext.Users
+                // Gets users which id matches the id of the user we want to check
+                .Where(user => user.UserId == userId)
+                // Gets the first element
+                .First()
+                // Select inly the id
+                .RoleId;
+            // Returst true if the role identificator is "Master", otherwise false
+            return dbContext.Roles
+                // Gets the roles matching the id of the rolw of the current user
+                .Where(role => role.RoleId == roleId)
+                // Gets the first element
+                .First()
+                // Check is the role identificator is "Master"
+                .RoleIdentificator == "Master";
         }
 
         public static IEnumerable<UserInformation> GetUsers(int userId, int pagingSize, int skipAmount, VacationManagerContext dbContext)
         {
             // Create a nested context that will be used to retireve role's identificator
             VacationManagerContext nestedDbContext = new VacationManagerContext();
-            // Retrieve the next 10 rows of the table users
-            IEnumerable<User> users = dbContext.Users.Where(user => user.UserId != userId).Skip(skipAmount).Take(pagingSize);
+            // Retrieve the next 10 rows of the table users where the user id is different from the current user's
+            IEnumerable<User> users = dbContext.Users
+                // Gets the users which have a different id from the id of the current user
+                .Where(user => user.UserId != userId)
+                // Skip the viewed amount
+                .Skip(skipAmount)
+                // Take only the amount of the paging size
+                .Take(pagingSize);
             ICollection<UserInformation> usersInformation = new List<UserInformation>();
             foreach (User user in users)
             {
+                // For every retrieved user add a new instance of UserInformation
                 usersInformation.Add(new UserInformation()
                 {
                     UserId = user.UserId,
                     UserName = user.UserName,
                     Email = user.Email,
-                    RoleIdentificator = nestedDbContext.Roles.Where(role => role.RoleId == user.RoleId).First().RoleIdentificator
+                    // Gets the role identificator
+                    RoleIdentificator = nestedDbContext.Roles
+                    // Gets the role matching the role id of the user role id
+                    .Where(role => role.RoleId == user.RoleId)
+                    // Gets the first element
+                    .First()
+                    // Select inly the role identificator
+                    .RoleIdentificator
                 });
             }
-            nestedDbContext.Dispose();
             return usersInformation;
         }
 
+        // Gets the count of the users in the database
         public static int GetUserCount(VacationManagerContext dbContext)
         {
             return dbContext.Users.Count();
         }
 
+        // Removes a user
         public static void RemoveUser(int userId, VacationManagerContext dbContext)
         {
-            dbContext.Users.Remove(dbContext.Users.Where(user=>user.UserId == userId).First());
+            // Remove the user matching the is of the user we want to remove
+            dbContext.Users.Remove(
+                dbContext.Users
+                // Gets the users matching the id of the desired user
+                .Where(user => user.UserId == userId)
+                // Gets the first element
+                .First()
+            );
+            // Saves the canges made to the context in the database
             dbContext.SaveChanges();
         }
 
         public static void EditUser(int userId, string newEmail, string newRoleIdenificator, VacationManagerContext dbContext)
         {
+            // Instantiating a nested context so that we can use it for separate request to the database
             VacationManagerContext nestedDbContext = new VacationManagerContext();
-            User user = dbContext.Users.Where(user => user.UserId == userId).First();
+            // Gets the user that mactches the id of the user we want ot edit
+            User user = dbContext.Users
+                // Gets the users matching the id of the user we want to edit
+                .Where(user => user.UserId == userId)
+                .First();
+
+            // Assign the new email to the user
             user.Email = newEmail;
-            Role role = nestedDbContext.Roles.Where(role=>role.RoleIdentificator == newRoleIdenificator).FirstOrDefault();
-            if(role == null)
+
+            // Gets the role of the user
+            Role role = nestedDbContext.Roles
+                // Gets the roles matching the role identifactor of the new role
+                .Where(role => role.RoleIdentificator == newRoleIdenificator)
+                // Gets the forst element of there is one, otherwise it returns null
+                .FirstOrDefault();
+
+            // If there isn't such a role create one
+            if (role == null)
             {
+                // Instantiate a new role
                 role = new Role()
                 {
                     RoleIdentificator = newRoleIdenificator,
                 };
+                // Add the new role
                 nestedDbContext.Roles.Add(role);
+                // Saves the canges made to the context in the database
                 nestedDbContext.SaveChanges();
             }
+            // Assign the new role to the user
             user.Role = role;
-            nestedDbContext.Dispose();
+            // Saves the canges made to the context in the database
             dbContext.SaveChangesAsync();
         }
     }

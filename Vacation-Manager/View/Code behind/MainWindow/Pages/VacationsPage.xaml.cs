@@ -95,7 +95,11 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
             return img;
         }
         // Event handlers
-
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Update the datagrid
+            UpdateDataGrid(0);
+        }
         // Invoked every time the PrevButton is clicked
         private void PrevButton_Click(object sender, RoutedEventArgs e)
         {

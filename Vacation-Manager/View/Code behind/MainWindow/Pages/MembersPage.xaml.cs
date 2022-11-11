@@ -115,6 +115,11 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
             MemberDataGrid.ItemsSource = _usersInformation;
         }
         // Event handlers
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Update the datagrid
+            UpdateDataGrid(0);
+        }
 
         private void KeyDown_Filter(object sender, KeyEventArgs e)
         {

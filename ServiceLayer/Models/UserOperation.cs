@@ -30,5 +30,7 @@
         GetUserByName = 24,
         GetProjectByName = 25,
         GetTeamByName = 26,
+
+        GetCurrentUserInformation = 27,
     }
 }

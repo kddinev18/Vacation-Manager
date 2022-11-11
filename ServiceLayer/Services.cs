@@ -265,5 +265,11 @@ namespace ServiceLayer
             string serializedData = ClientToServerComunication($"{(int)UserOperation.GetTeamByName}|{teamName}");
             return serializedData.Split('|')[1];
         }
+
+        public static string GetCurrentUserInformation(int userId)
+        {
+            string serializedData = ClientToServerComunication($"{(int)UserOperation.GetCurrentUserInformation}|{userId}");
+            return serializedData.Split('|')[1];
+        }
     }
 }

@@ -65,7 +65,7 @@ namespace BusinessLogicLayer.Logic
             else
             {
                 // If the user is not admin
-                vacations = dbContext.Vacations.Where(vacation => vacation.UserId == userId).Skip(skipAmount).Take(pagingSize); ;
+                vacations = dbContext.Vacations.Where(vacation => vacation.UserId == userId).Skip(skipAmount).Take(pagingSize);
             }
 
             foreach (Vacation vacation in vacations)

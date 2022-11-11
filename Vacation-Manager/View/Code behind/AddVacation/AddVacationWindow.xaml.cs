@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Vacation_Manager.Models;
 using Vacation_Manager.View.Code_behind.MainWindow.Pages;
 using Vacation_Manager.ViewModel;
+# nullable disable
 
 namespace Vacation_Manager.View.Code_behind.AddVacation
 {

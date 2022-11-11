@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Vacation_Manager.Models;
+# nullable disable
 
 namespace Vacation_Manager.ViewModel
 {

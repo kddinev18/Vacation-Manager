@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceLayer;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Vacation_Manager.Models;
 using Vacation_Manager.View.Code_behind.AddMember;
 using Vacation_Manager.View.Code_behind.MainWindow.Pages;
 using Vacation_Manager.View.Code_behind.UserAuthenticationWindow;
 using Vacation_Manager.ViewModel;
+# nullable disable
 
 namespace Vacation_Manager.View.Code_behind.MainWindow
 {
@@ -32,6 +35,12 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
         public VacationManagerMainWindow()
         {
             InitializeComponent();
+            UserInformation userInformation = UserLogic.GetCurrrentUserInformation(CurrentUserInformation.CurrentUserId.Value);
+            Random r = new Random();
+            IconColor.Background = userInformation.BgColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255)));
+            IconText.Text = userInformation.UserName.Substring(0,1);
+            Username.Text = userInformation.UserName;
+            Role.Text = userInformation.RoleIdentificator;
             // Intialise the page as lazy so that they can load when they are requested
             MembersPage = new Lazy<MembersPage>();
             DashboardPage = new Lazy<DashboardPage>();
@@ -41,13 +50,19 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
             // Loading the members page intpo the memory and showing it
             ShowPage(MembersPage.Value);
         }
-
         // Shows a page
         public void ShowPage(Page page)
         {
             MainWindowFrame.Content = page;
         }
         // Event handlers
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Remove the server connection
+            Services.RemoveConnection();
+            // Shutdown the application
+            Application.Current.Shutdown();
+        }
 
         // Invoke every time the user clicks on the window
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

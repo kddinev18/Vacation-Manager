@@ -296,6 +296,12 @@ namespace Server
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
+                case UserOperation.GetCurrentUserInformation:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetCurrentUserInformation(int.Parse(args[0]), vacationManagerContext)}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
                 default:
                     // If the operation is invalid throw an exception
                     throw new InvalidOperationException("There is no operation called: " + operation.ToString());

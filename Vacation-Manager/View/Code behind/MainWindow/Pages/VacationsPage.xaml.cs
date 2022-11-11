@@ -18,6 +18,7 @@ using Vacation_Manager.Models;
 using Vacation_Manager.View.Code_behind.AddVacation;
 using Vacation_Manager.View.Code_behind.ImagePreview;
 using Vacation_Manager.ViewModel;
+# nullable disable
 
 namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
 {

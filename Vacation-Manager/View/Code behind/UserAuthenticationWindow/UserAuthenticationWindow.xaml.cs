@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Vacation_Manager.View.Code_behind.UserAuthenticationWindow.Pages;
 using Vacation_Manager.View.Code_behind.MainWindow;
+# nullable disable
 
 namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
 {

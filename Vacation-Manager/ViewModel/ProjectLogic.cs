@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 using Vacation_Manager.Models;
-
+# nullable disable
 namespace Vacation_Manager.ViewModel
 {
     public static class ProjectLogic

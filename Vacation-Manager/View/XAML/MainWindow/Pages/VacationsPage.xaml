@@ -62,8 +62,8 @@
         <!--Members Datagrid-->
         <DataGrid Grid.Row="5" x:Name="VacationDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="Auto"/>
-                <DataGridTemplateColumn Header="Icon" IsReadOnly="True" Width="0.35*">
+                <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="Auto" Binding="{Binding VacationId}"/>
+                <DataGridTemplateColumn Header="Icon" IsReadOnly="True" Width="0.4*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

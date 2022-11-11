@@ -141,5 +141,9 @@ namespace Server
         {
             return JsonSerializer.Serialize(TeamLogic.GetTeamByName(teamName, dbContext));
         }
+        public static string GetCurrentUserInformation(int userId, VacationManagerContext dbContext)
+        {
+            return JsonSerializer.Serialize(UserLogic.GetCurrentUserInformation(userId, dbContext));
+        }
     }
 }

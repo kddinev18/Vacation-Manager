@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using Vacation_Manager.Models;
+# nullable disable
 
 namespace Vacation_Manager.ViewModel
 {

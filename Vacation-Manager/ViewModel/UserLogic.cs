@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using Vacation_Manager.Models;
+# nullable disable
 
 namespace Vacation_Manager.ViewModel
 {
@@ -94,5 +95,22 @@ namespace Vacation_Manager.ViewModel
                 return null;
             }
         }
+        public static UserInformation GetCurrrentUserInformation(int userId)
+        {
+            // Try the code
+            try
+            {
+                // Get a the current user
+                return JsonSerializer.Deserialize<UserInformation>(Services.GetCurrentUserInformation(userId));
+            }
+            // If there are exception don't crash the application just show a message box
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
     }
 }

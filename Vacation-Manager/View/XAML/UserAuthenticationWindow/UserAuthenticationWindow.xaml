@@ -34,8 +34,8 @@
             </Grid>
 
             <Grid Grid.Column="2">
-                <Button Margin="15" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="60" Height="60" Background="{x:Null}" BorderBrush="#4E6BBF" ToolTip="Close" x:Name="ExitButton" Click="ExitButton_Click">
-                    <materialDesign:PackIcon Kind="Close" Foreground="#4D49BF" Width="40" Height="40" />
+                <Button Margin="15" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionButton}" Width="30" Height="30" Background="{x:Null}" BorderBrush="#4E6BBF" ToolTip="Close" x:Name="ExitButton" Click="ExitButton_Click">
+                    <materialDesign:PackIcon Kind="Close" Foreground="#4D49BF" Width="20" Height="20" />
                 </Button>
             </Grid>
 

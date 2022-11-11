@@ -26,6 +26,7 @@ namespace Vacation_Manager.View.Code_behind.UserControls
             InitializeComponent();
         }
 
+        // The property used for binding the icon of the textbox
         public PackIconMaterialKind TextBoxIcon
         {
             get { return (PackIconMaterialKind)GetValue(TextBoxIconProperty); }
@@ -34,6 +35,7 @@ namespace Vacation_Manager.View.Code_behind.UserControls
 
         public static readonly DependencyProperty TextBoxIconProperty = DependencyProperty.Register("TextBoxIcon", typeof(PackIconMaterialKind), typeof(TextBoxControl));
 
+        // The property used for binding the hint text of the textbox
         public string TextBoxHintText
         {
             get { return (string)GetValue(TextBoxHintTextProperty); }

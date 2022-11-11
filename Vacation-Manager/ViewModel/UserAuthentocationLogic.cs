@@ -24,8 +24,10 @@ namespace Vacation_Manager.ViewModel
             {
                 // Register and assign the current user id to the id of the user that has just registered
                 CurrentUserInformation.CurrentUserId = Services.Register(userName, email, password);
+                // If there is a user with the scpecific username and password
                 if (CurrentUserInformation.CurrentUserId.HasValue)
                 {
+                    // Checks if the user is an admin
                     CurrentUserInformation.IsAdmin = Services.CheckAuthentication(CurrentUserInformation.CurrentUserId.Value);
                 }
 
@@ -73,8 +75,10 @@ namespace Vacation_Manager.ViewModel
             {
                 // Log in and assign the current user id to the id of the user that has just logged
                 CurrentUserInformation.CurrentUserId = Services.LogInWithCookies();
+                // If there is a user with the scpecific username and password in the cookies file
                 if(CurrentUserInformation.CurrentUserId.HasValue)
                 {
+                    // Checks if the user is an admin
                     CurrentUserInformation.IsAdmin = Services.CheckAuthentication(CurrentUserInformation.CurrentUserId.Value);
                 }
             }
@@ -86,8 +90,10 @@ namespace Vacation_Manager.ViewModel
             }
         }
 
+        // When logging out remove the cookies
         public static void LogOut()
         {
+            // Removes the cookies
             Services.RemoveCookies();
         }
 

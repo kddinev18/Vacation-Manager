@@ -14,11 +14,13 @@ namespace Vacation_Manager.ViewModel
     {
         public static IEnumerable<UserInformation> GetUsers(int userId, int pagingSize, int skipAmount)
         {
+            // Try the code
             try
             {
-                // Converts the text into UserInformation objects and returns it
+                // Get the users skipping the already viewed amount the taking only the amount equal to the paging size
                 return JsonSerializer.Deserialize<IEnumerable<UserInformation>>(Services.GetUsers(userId, pagingSize, skipAmount));
             }
+            // If there are exception don't crash the application just show a message box
             catch (Exception exception)
             {
                 // Show error message box
@@ -29,10 +31,13 @@ namespace Vacation_Manager.ViewModel
 
         public static int GetUserCount()
         {
+            // Try the code
             try
             {
+                // Gets the coint of the users in the database
                 return Services.GetUserCount();
             }
+            // If there are exception don't crash the application just show a message box
             catch (Exception exception)
             {
                 // Show error message box
@@ -43,10 +48,13 @@ namespace Vacation_Manager.ViewModel
 
         public static void RemoveUser(int userId)
         {
+            // Try the code
             try
             {
+                // Removes a user
                 Services.RemoveUser(userId);
             }
+            // If there are exception don't crash the application just show a message box
             catch (Exception exception)
             {
                 // Show error message box
@@ -56,10 +64,13 @@ namespace Vacation_Manager.ViewModel
 
         public static void EditUser(int userId, string email, string role)
         {
+            // Try the code
             try
             {
+                // Edits a user
                 Services.EditUser(userId, email, role);
             }
+            // If there are exception don't crash the application just show a message box
             catch (Exception exception)
             {
                 // Show error message box

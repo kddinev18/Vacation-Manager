@@ -52,6 +52,7 @@ namespace Vacation_Manager.View.Code_behind.AddVacation
             }
         }
 
+        // Invoke every time the CancelButton is clicked
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             isOpened = false;
@@ -90,26 +91,33 @@ namespace Vacation_Manager.View.Code_behind.AddVacation
             _to = picker.SelectedDate.Value;
         }
 
+        // Invoke every time the user clicks on the window
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Cecks if the button pressed is the left button
             if (e.ChangedButton == MouseButton.Left)
             {
+                // Drag the window with the button
                 this.DragMove();
             }
         }
 
+        // Invoke every time the user clicks on the window
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            // Checks if the click count was 2
             if (e.ClickCount == 2)
             {
+                // If the window is maximised, minimise it
                 if (_isMaximized)
                 {
                     this.WindowState = WindowState.Normal;
-                    this.Width = 350;
-                    this.Height = 350;
+                    this.Width = 1080;
+                    this.Height = 720;
 
                     _isMaximized = false;
                 }
+                // Otheewise maximise it
                 else
                 {
                     this.WindowState = WindowState.Maximized;

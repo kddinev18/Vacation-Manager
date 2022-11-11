@@ -243,9 +243,9 @@ namespace ServiceLayer
             return int.Parse(serializedData.Split('|')[1]);
         }
 
-        public static void ApprooveVacation(int vacationId)
+        public static void ApproveVacation(int vacationId)
         {
-            ClientToServerComunication($"{(int)UserOperation.ApprooveVacation}|{vacationId}");
+            ClientToServerComunication($"{(int)UserOperation.ApproveVacation}|{vacationId}");
         }
     }
 }

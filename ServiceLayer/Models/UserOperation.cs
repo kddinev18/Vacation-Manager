@@ -25,6 +25,6 @@
         AddVacation = 20,
         GetVacations = 21,
         GetVacationsCount = 22,
-        ApprooveVacation = 23,
+        ApproveVacation = 23,
     }
 }

@@ -17,10 +17,13 @@ namespace Vacation_Manager.ViewModel
     {
         public static void AddProject(string name, string description)
         {
+            // Try the code
             try
             {
+                // Add a project
                 Services.AddProject(name, description);
             }
+            // If there are exception don't crash the application just show a message box
             catch (Exception exception)
             {
                 // Show error message box
@@ -30,10 +33,13 @@ namespace Vacation_Manager.ViewModel
 
         public static IEnumerable<ProjectInformation> GetProjects(int userId, int pagingSize, int skipAmount)
         {
+            // Try the code
             try
             {
+                // Get the projects skipping the already viewed amount the taking only the amount equal to the paging size
                 return JsonSerializer.Deserialize<IEnumerable<ProjectInformation>>(Services.GetProjects(userId, pagingSize, skipAmount));
             }
+            // If there are exception don't crash the application just show a message box
             catch (Exception exception)
             {
                 // Show error message box
@@ -44,10 +50,13 @@ namespace Vacation_Manager.ViewModel
 
         public static int GetProjectCount(int userId)
         {
+            // Try the code
             try
             {
+                // Getting the count of all posts
                 return Services.GetProjectCount(userId);
             }
+            // If there are exception don't crash the application just show a message box
             catch (Exception exception)
             {
                 // Show error message box
@@ -58,10 +67,13 @@ namespace Vacation_Manager.ViewModel
 
         public static void EditProject(int projectId, string name, string description)
         {
+            // Try the code
             try
             {
+                // Edit a project
                 Services.EditProject(projectId, name, description);
             }
+            // If there are exception don't crash the application just show a message box
             catch (Exception exception)
             {
                 // Show error message box
@@ -71,10 +83,13 @@ namespace Vacation_Manager.ViewModel
 
         public static void RemoveProject(int projectId)
         {
+            // Try the code
             try
             {
+                // Remove a prject
                 Services.RemoveProject(projectId);
             }
+            // If there are exception don't crash the application just show a message box
             catch (Exception exception)
             {
                 // Show error message box

@@ -279,7 +279,8 @@ namespace Server
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
                 default:
-                    break;
+                    // If the operation is invalid throw an exception
+                    throw new InvalidOperationException("There is no operation called: " + operation.ToString());
             }
         }
     }

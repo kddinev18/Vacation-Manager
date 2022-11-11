@@ -32,31 +32,41 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
         public VacationManagerMainWindow()
         {
             InitializeComponent();
+            // Intialise the page as lazy so that they can load when they are requested
             MembersPage = new Lazy<MembersPage>();
             DashboardPage = new Lazy<DashboardPage>();
             ProjectsPage = new Lazy<ProjectsPage>();
             TeamsPage = new Lazy<TeamsPage>();
             VacationsPage = new Lazy<VacationsPage>();
+            // Loading the members page intpo the memory and showing it
             ShowPage(MembersPage.Value);
         }
 
+        // Shows a page
         public void ShowPage(Page page)
         {
             MainWindowFrame.Content = page;
         }
+        // Event handlers
 
+        // Invoke every time the user clicks on the window
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Cecks if the button pressed is the left button
             if(e.ChangedButton == MouseButton.Left)
             {
+                // Drag the window with the button
                 this.DragMove();
             }
         }
 
+        // Invoke every time the user clicks on the window
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            // Checks if the click count was 2
             if(e.ClickCount == 2)
             {
+                // If the window is maximised, minimise it
                 if(_isMaximized)
                 {
                     this.WindowState = WindowState.Normal;
@@ -65,6 +75,7 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
 
                     _isMaximized = false;
                 }
+                // Otheewise maximise it
                 else
                 {
                     this.WindowState = WindowState.Maximized;
@@ -74,31 +85,37 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
             }
         }
 
+        // Invoked every time DashboardButton is clicked
         private void DashboardButton_Click(object sender, RoutedEventArgs e)
         {
             ShowPage(DashboardPage.Value);
         }
 
+        // Invoked every time MembersButton is clicked
         private void MembersButton_Click(object sender, RoutedEventArgs e)
         {
             ShowPage(MembersPage.Value);
         }
 
+        // Invoked every time ProjectsButton is clicked
         private void ProjectsButton_Click(object sender, RoutedEventArgs e)
         {
             ShowPage(ProjectsPage.Value);
         }
 
+        // Invoked every time TeamsButton is clicked
         private void TeamsButton_Click(object sender, RoutedEventArgs e)
         {
             ShowPage(TeamsPage.Value);
         }
 
+        // Invoked every time VacationsButton is clicked
         private void VacationsButton_Click(object sender, RoutedEventArgs e)
         {
             ShowPage(VacationsPage.Value);
         }
 
+        // Invoked every time LogOutButton is clicked
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
             UsersAuthenticationWindow window = new UsersAuthenticationWindow();

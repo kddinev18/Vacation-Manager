@@ -30,27 +30,38 @@ namespace Vacation_Manager.View.Code_behind.UserAuthenticationWindow
         {
             try
             {
+                // Sets up a connection with the server
                 Services.SetUpConnection();
+                // Instatiates the login page
                 LogInPage = new LogInPage(this);
+                // Instatiates the register page
                 RegistrationPage = new RegistrationPage(this);
 
                 InitializeComponent();
+                // Show the login form
                 ShowPage(LogInPage);
             }
+            // If there are any exception don't just close the window, show a message box first
             catch (Exception)
             {
+                // Shows a message box
                 MessageBox.Show("The server is currently down. Please excuse us.", "Connection error");
+                // Closes the application
                 Application.Current.Shutdown();
             }
         }
         public void ShowPage(Page page)
         {
+            // Change the content of the form with the specific page
             Forms.Content = page;
         }
         public void ShowMainWindow()
         {
+            // Instantiates a new window
             VacationManagerMainWindow mainWindow = new VacationManagerMainWindow();
+            // Show the new window
             mainWindow.Show();
+            // Close this window
             this.Close();
         }
 

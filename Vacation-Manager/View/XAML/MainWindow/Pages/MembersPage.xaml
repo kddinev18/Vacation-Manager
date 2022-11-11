@@ -27,10 +27,6 @@
         <!--Menu Icon-->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
-            <Button Style="{StaticResource topButton}" Margin="30 10 0 35" HorizontalAlignment="Right">
-                <Icon:PackIconMaterial Kind="Bell"/>
-            </Button>
-
             <Button Style="{StaticResource topButton}" Margin="30 10 20 35" Background="#dcdcdc" HorizontalAlignment="Right" Click="RefreshButton_Click">
                 <Icon:PackIconMaterial Kind="Refresh"/>
             </Button>

@@ -36,14 +36,6 @@
                         <!--Menu Separator-->
                         <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
                         <!--Menu Buttons-->
-                        <StackPanel DockPanel.Dock="Top">
-                            <Button x:Name="DashboradButton" Style="{StaticResource menuButton}" Click="DashboardButton_Click">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Dashboard"/>
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
 
                         <StackPanel DockPanel.Dock="Top">
                             <Button x:Name="MembersButton" Style="{StaticResource menuButton}" Click="MembersButton_Click">

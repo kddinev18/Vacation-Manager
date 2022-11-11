@@ -28,7 +28,6 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
     {
         private bool _isMaximized = false;
         public Lazy<MembersPage> MembersPage { get; set; }
-        public Lazy<DashboardPage> DashboardPage { get; set; }
         public Lazy<ProjectsPage> ProjectsPage { get; set; }
         public Lazy<TeamsPage> TeamsPage { get; set; }
         public Lazy<VacationsPage> VacationsPage { get; set; }
@@ -43,7 +42,6 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
             Role.Text = userInformation.RoleIdentificator;
             // Intialise the page as lazy so that they can load when they are requested
             MembersPage = new Lazy<MembersPage>();
-            DashboardPage = new Lazy<DashboardPage>();
             ProjectsPage = new Lazy<ProjectsPage>();
             TeamsPage = new Lazy<TeamsPage>();
             VacationsPage = new Lazy<VacationsPage>();
@@ -99,13 +97,6 @@ namespace Vacation_Manager.View.Code_behind.MainWindow
                 }
             }
         }
-
-        // Invoked every time DashboardButton is clicked
-        private void DashboardButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShowPage(DashboardPage.Value);
-        }
-
         // Invoked every time MembersButton is clicked
         private void MembersButton_Click(object sender, RoutedEventArgs e)
         {

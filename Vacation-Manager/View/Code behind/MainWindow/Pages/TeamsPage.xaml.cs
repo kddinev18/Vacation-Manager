@@ -92,7 +92,48 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
             // Assign the datagrid the collection
             TeamsDataGrid.ItemsSource = _teamInformation;
         }
+
+        public void UpdateDataGrid(string filter)
+        {
+            // Canges the count of the teams based on the argument i {-1;0;1}
+            _teamsCount = 1;
+            // Devide the vacations count to the paging size to see how many pages are there
+            _numberOfPages = (int)Math.Ceiling((double)_teamsCount / _pagingSize);
+
+            // Get the teams from the database
+            TeamInformation team = TeamLogic.GetTeamByName(filter);
+            _teamInformation = new ObservableCollection<TeamInformation>();
+            _teamInformation.Add(team);
+            Random r = new Random();
+            foreach (TeamInformation teamInformation in _teamInformation)
+            {
+                // Assign the bachground color for the icon of the team
+                teamInformation.BgColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255)));
+                // Assign the inital of the icon of the team
+                teamInformation.Initials = teamInformation.Name.Substring(0, 1);
+
+                // Assign the bachground color for the icon of the project
+                teamInformation.ProjectBgColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255)));
+                // Assign the inital of the icon of the project
+                teamInformation.ProjectInitials = teamInformation.ProjectName.Substring(0, 1);
+
+                // If the user is admin enable the edit button, otherwise disable it
+                teamInformation.EditButton = CurrentUserInformation.IsAdmin;
+                // If the user is admin enable the remove button, otherwise disable it
+                teamInformation.RemoveButton = CurrentUserInformation.IsAdmin;
+            }
+            // Assign the datagrid the collection
+            TeamsDataGrid.ItemsSource = _teamInformation;
+        }
         // Event handlers
+
+        private void KeyDown_Filter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                UpdateDataGrid(Filter.TextBox.Text);
+            }
+        }
 
         // Invoked every time the PrevButton is clicked
         private void PrevButton_Click(object sender, RoutedEventArgs e)

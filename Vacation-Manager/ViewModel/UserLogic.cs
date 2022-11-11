@@ -77,5 +77,22 @@ namespace Vacation_Manager.ViewModel
                 MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        public static UserInformation GetUserByName(string UserName)
+        {
+            // Try the code
+            try
+            {
+                // Get a user
+                return JsonSerializer.Deserialize<UserInformation>(Services.GetUserByName(UserName));
+            }
+            // If there are exception don't crash the application just show a message box
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
     }
 }

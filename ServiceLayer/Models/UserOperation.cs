@@ -26,5 +26,9 @@
         GetVacations = 21,
         GetVacationsCount = 22,
         ApproveVacation = 23,
+
+        GetUserByName = 24,
+        GetProjectByName = 25,
+        GetTeamByName = 26,
     }
 }

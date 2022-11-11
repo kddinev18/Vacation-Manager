@@ -126,5 +126,20 @@ namespace Server
         {
             VacationLogic.ApprooveVacation(cationId, dbContext);
         }
+
+        public static string GetUserByName(string userName, VacationManagerContext dbContext)
+        {
+            return JsonSerializer.Serialize(UserLogic.GetUserByName(userName, dbContext));
+        }
+
+        public static string GetProjectByName(string projectName, VacationManagerContext dbContext)
+        {
+            return JsonSerializer.Serialize(ProjectLogic.GetProjectByName(projectName, dbContext));
+        }
+
+        public static string GetTeamByName(string teamName, VacationManagerContext dbContext)
+        {
+            return JsonSerializer.Serialize(TeamLogic.GetTeamByName(teamName, dbContext));
+        }
     }
 }

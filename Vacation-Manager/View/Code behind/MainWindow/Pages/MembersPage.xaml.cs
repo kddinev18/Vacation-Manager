@@ -88,8 +88,41 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
             // Assign the datagrid the collection
             MemberDataGrid.ItemsSource = _usersInformation;
         }
+        public void UpdateDataGrid(string filter)
+        {
+            // Set the count to 1
+            _userCount = 1;
+            // Devide the vacations count to the paging size to see how many pages are there
+            _numberOfPages = (int)Math.Ceiling((double)_userCount / _pagingSize);
+
+            // Get the users from the database
+            UserInformation user = UserLogic.GetUserByName(filter);
+            _usersInformation = new ObservableCollection<UserInformation>();
+            _usersInformation.Add(user);
+            Random r = new Random();
+            foreach (UserInformation userInformation in _usersInformation)
+            {
+                // Assign the bachground color for the icon
+                userInformation.BgColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255)));
+                // Assign the inital of the icon
+                userInformation.Initials = userInformation.UserName.Substring(0, 1);
+                // If the user is admin enable the edit button, otherwise disable it
+                userInformation.EditButton = CurrentUserInformation.IsAdmin;
+                // If the user is admin enable the remove button, otherwise disable it
+                userInformation.RemoveButton = CurrentUserInformation.IsAdmin;
+            }
+            // Assign the datagrid the collection
+            MemberDataGrid.ItemsSource = _usersInformation;
+        }
         // Event handlers
 
+        private void KeyDown_Filter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                UpdateDataGrid(Filter.TextBox.Text);
+            }
+        }
 
         // Invoked every time the PrevButton is clicked
         private void PrevButton_Click(object sender, RoutedEventArgs e)

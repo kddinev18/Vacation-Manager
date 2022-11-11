@@ -86,8 +86,41 @@ namespace Vacation_Manager.View.Code_behind.MainWindow.Pages
             // Assign the datagrid the collection
             ProjectDataGrid.ItemsSource = _projectsInformation;
         }
+        public void UpdateDataGrid(string filter)
+        {
+            // Set the count to 1
+            _projectCount = 1;
+            // Devide the vacations count to the paging size to see how many pages are there
+            _numberOfPages = (int)Math.Ceiling((double)_projectCount / _pagingSize);
+
+            // Get the users from the database
+            ProjectInformation project = ProjectLogic.GetProjectByName(filter);
+            _projectsInformation = new ObservableCollection<ProjectInformation>();
+            _projectsInformation.Add(project);
+            Random r = new Random();
+            foreach (ProjectInformation projectInformation in _projectsInformation)
+            {
+                // Assign the bachground color for the icon
+                projectInformation.BgColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255)));
+                // Assign the inital of the icon
+                projectInformation.Initials = projectInformation.Name.Substring(0, 1);
+                // If the user is admin enable the edit button, otherwise disable it
+                projectInformation.EditButton = CurrentUserInformation.IsAdmin;
+                // If the user is admin enable the remove button, otherwise disable it
+                projectInformation.RemoveButton = CurrentUserInformation.IsAdmin;
+            }
+            // Assign the datagrid the collection
+            ProjectDataGrid.ItemsSource = _projectsInformation;
+        }
         // Event handlers
 
+        private void KeyDown_Filter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                UpdateDataGrid(Filter.TextBox.Text);
+            }
+        }
 
         // Invoked every time the AddProjectsButton is clicked
         private void AddProjectsButton_Click(object sender, RoutedEventArgs e)

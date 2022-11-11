@@ -2,6 +2,7 @@
 using DataAccessLayer.Data.Model;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -192,6 +193,40 @@ namespace BusinessLogicLayer.Logic
             nesteDbContext.SaveChanges();
             // Save the canges made to the contect into the database
             dbContext.SaveChanges();
+        }
+
+        public static TeamInformation GetTeamByName(string teamName, VacationManagerContext dbContext)
+        {
+            // Instantiating a nested context so that we can use it for separate request to the database
+            VacationManagerContext nestedDbContext = new VacationManagerContext();
+
+            Team team = dbContext.Teams.Where(team => team.Name == teamName).FirstOrDefault();
+
+            if(team == null)
+            {
+                return null;
+            }
+
+            return new TeamInformation()
+            {
+                TeamId = team.TeamId,
+                Name = team.Name,
+                // using the nested context for getting the project name
+                ProjectName = nestedDbContext.Projects
+                    // Get the project that matches the project id of the project the team is working on
+                    .Where(project => project.ProjectId == team.ProjectId)
+                    // Get only the first element
+                    .First()
+                    // Get the name of the project
+                    .Name,
+                // Get the members' names and join them usgin the separator ';'
+                Members = String.Join(';',
+                    nestedDbContext.UsersTeams
+                    // Get the userTeam with maching team id
+                    .Where(userTeam => userTeam.TeamId == team.TeamId)
+                    // Select only the username
+                    .Select(userTeam => userTeam.User.UserName)),
+            };
         }
     }
 }

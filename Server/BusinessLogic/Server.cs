@@ -278,6 +278,24 @@ namespace Server
                     // send data to the client
                     client.Client.Send(Encoding.UTF8.GetBytes(response));
                     break;
+                case UserOperation.GetUserByName:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetUserByName(args[0], vacationManagerContext)}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.GetProjectByName:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetProjectByName(args[0], vacationManagerContext)}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
+                case UserOperation.GetTeamByName:
+                    // Generate response
+                    response = $"{_success}|{Operations.GetTeamByName(args[0], vacationManagerContext)}";
+                    // send data to the client
+                    client.Client.Send(Encoding.UTF8.GetBytes(response));
+                    break;
                 default:
                     // If the operation is invalid throw an exception
                     throw new InvalidOperationException("There is no operation called: " + operation.ToString());

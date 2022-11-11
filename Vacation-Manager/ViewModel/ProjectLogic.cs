@@ -96,5 +96,22 @@ namespace Vacation_Manager.ViewModel
                 MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        public static ProjectInformation GetProjectByName(string projectName)
+        {
+            // Try the code
+            try
+            {
+                // Get a prject by name
+                return JsonSerializer.Deserialize<ProjectInformation>(Services.GetProjectByName(projectName));
+            }
+            // If there are exception don't crash the application just show a message box
+            catch (Exception exception)
+            {
+                // Show error message box
+                MessageBox.Show(exception.Message, "Fatal error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
     }
 }

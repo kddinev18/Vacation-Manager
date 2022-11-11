@@ -247,5 +247,23 @@ namespace ServiceLayer
         {
             ClientToServerComunication($"{(int)UserOperation.ApproveVacation}|{vacationId}");
         }
+
+        public static string GetUserByName(string userName)
+        {
+            string serializedData = ClientToServerComunication($"{(int)UserOperation.GetUserByName}|{userName}");
+            return serializedData.Split('|')[1];
+        }
+
+        public static string GetProjectByName(string projectName)
+        {
+            string serializedData = ClientToServerComunication($"{(int)UserOperation.GetProjectByName}|{projectName}");
+            return serializedData.Split('|')[1];
+        }
+
+        public static string GetTeamByName(string teamName)
+        {
+            string serializedData = ClientToServerComunication($"{(int)UserOperation.GetTeamByName}|{teamName}");
+            return serializedData.Split('|')[1];
+        }
     }
 }

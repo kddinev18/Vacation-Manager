@@ -96,5 +96,11 @@ namespace BusinessLogicLayer.Logic
             // Save the changes from the current context into the database
             dbContext.SaveChanges();
         }
+
+        public static Project GetProjectByName(string projectName, VacationManagerContext dbContext)
+        {
+            // Get the project by name
+            return dbContext.Projects.Where(project => project.Name == projectName).FirstOrDefault();
+        }
     }
 }

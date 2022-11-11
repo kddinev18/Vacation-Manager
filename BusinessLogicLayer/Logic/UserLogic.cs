@@ -379,5 +379,30 @@ namespace BusinessLogicLayer.Logic
             // Saves the canges made to the context in the database
             dbContext.SaveChangesAsync();
         }
+
+        public static UserInformation GetUserByName(string userName, VacationManagerContext dbContext)
+        {
+            // Instantiating a nested context so that we can use it for separate request to the database
+            VacationManagerContext nestedDbContext = new VacationManagerContext();
+
+            // Get the user with the requed name
+            User user = dbContext.Users.Where(user => user.UserName == userName).FirstOrDefault();
+            // Check if there is a user with that name
+            if(user == null)
+            {
+                return null;
+            }
+            return new UserInformation()
+            {
+                UserId = user.UserId,
+                UserName = user.UserName,
+                Email = user.Email,
+                RoleIdentificator = nestedDbContext.Roles
+                    // Gets the role matching the role id of the user role id
+                    .Where(role => role.RoleId == user.RoleId)
+                    // Gets the first element
+                    .First().RoleIdentificator
+            };
+        }
     }
 }
